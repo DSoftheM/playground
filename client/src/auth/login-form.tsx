@@ -2,20 +2,19 @@ import { Button, Form, Input, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useLoginMutation } from "./use-login-mutation";
 import { apiProvider } from "../api-provider";
+import { useProfileQuery } from "../routes/use-profile-query";
+import { Navigate } from "react-router-dom";
+import { nav } from "../navigation/nav";
 
 export function LoginForm() {
     const [login, setLogin] = useState("1");
     const [password, setPassword] = useState("1");
     const loginMutation = useLoginMutation();
+    const profileQuery = useProfileQuery();
 
-    useEffect(() => {
-        apiProvider.auth.settings
-            .get()
-            .then((profile) => {
-                console.log("profile :>> ", profile);
-            })
-            .catch((err) => console.error(err));
-    }, []);
+    if (profileQuery.isSuccess) {
+        return <Navigate to={nav.main} />;
+    }
 
     return (
         <Form layout="vertical" onValuesChange={console.log}>

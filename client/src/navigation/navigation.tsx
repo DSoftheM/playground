@@ -17,8 +17,6 @@ const Root = styled.div`
 `;
 
 const Header = styled.div`
-    background-color: peachpuff;
-    padding: 10px;
     grid-area: header;
 `;
 

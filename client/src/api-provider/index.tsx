@@ -8,6 +8,9 @@ export const apiProvider = {
         async login(loginDto: ILoginUser) {
             return (await httpClient.post<LoginResponse>("/auth/login", loginDto)).data;
         },
+        async logout() {
+            return (await httpClient.get<void>("/auth/logout")).data;
+        },
         async register(registerDto: IRegisterUser) {
             return (await httpClient.post<void>("/auth/register", registerDto)).data;
         },

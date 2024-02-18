@@ -1,12 +1,15 @@
 import { PropsWithChildren } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { nav } from "../navigation/nav";
+import { useProfileQuery } from "./use-profile-query";
 
 type Props = {};
 
 export function WithAuth(props: PropsWithChildren) {
-    const access_token = localStorage.getItem("access_token");
-    if (!access_token) {
+    const profileQuery = useProfileQuery();
+
+    if (profileQuery.isLoading) return "Loading...";
+    if (!profileQuery.data) {
         return <Navigate to={nav.auth.login} />;
     }
 

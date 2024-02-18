@@ -9,7 +9,7 @@ type Options = {
     "max-age"?: number;
 };
 
-export function setCookie(name: string, value: string, options: Options) {
+function setCookie(name: string, value: string, options: Options) {
     options = {
         ...options,
         // path: "/",
