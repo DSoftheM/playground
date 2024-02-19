@@ -26,7 +26,6 @@ function setCookie(name: string, value: string, options: Options) {
         let optionValue = options[optionKey as keyof Options];
         updatedCookie += "=" + optionValue;
     }
-    console.log(updatedCookie);
     document.cookie = updatedCookie;
 }
 

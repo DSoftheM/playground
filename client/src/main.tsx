@@ -12,6 +12,10 @@ const GlobalStyle = createGlobalStyle`
         padding: 0px;
         box-sizing: border-box;
     }
+
+    body {
+        overflow: hidden;
+    }
 `;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

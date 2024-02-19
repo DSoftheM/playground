@@ -18,7 +18,9 @@ export function AppHeader(props: Props) {
     return (
         <Root>
             <Avatar />
-            <Button onClick={() => logoutMutation.mutate()}>Выйти</Button>
+            <Button type="primary" loading={logoutMutation.isLoading} onClick={() => logoutMutation.mutate()}>
+                Выйти
+            </Button>
         </Root>
     );
 }

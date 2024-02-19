@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import { CatsCreation } from "./cats-creation";
-import axios from "axios";
 import { Navigation } from "./navigation/navigation";
 import { nav } from "./navigation/nav";
 import { RegisterForm } from "./auth/register-form";

@@ -1,13 +1,21 @@
-import { Button, Form, Input, Typography } from "antd";
+import { Alert, Button, Form, Input, Typography } from "antd";
 import { useState } from "react";
 import { useRegisterMutation } from "./use-register-mutation";
+import { Navigate } from "react-router-dom";
+import { nav } from "../navigation/nav";
+import { useProfileQuery } from "./use-profile-query";
+import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
 
-type Props = {};
-
-export function RegisterForm(props: Props) {
+export function RegisterForm() {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const registerMutation = useRegisterMutation();
+    const profileQuery = useProfileQuery();
+
+    if (profileQuery.data) {
+        return <Navigate to={nav.main} state={{ alreadyLogged: true }} />;
+    }
 
     return (
         <Form layout="vertical" onValuesChange={console.log}>

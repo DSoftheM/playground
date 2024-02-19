@@ -1,8 +1,9 @@
 import { CloseSquareOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, List, Typography } from "antd";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { httpClient } from "./api-provider/axios";
 
 type FieldType = {
     id?: number;
@@ -14,13 +15,13 @@ type FieldType = {
 const provider = {
     cats: {
         async create(user: FieldType) {
-            (await axios.post<void>("/cats/create", user)).data;
+            (await httpClient.post<void>("/cats/create", user)).data;
         },
         async getAll() {
-            return (await axios.get<FieldType[]>("/cats")).data;
+            return (await httpClient.get<FieldType[]>("/cats")).data;
         },
         async delete(id: number) {
-            return (await axios.get<void>("/cats/delete", { params: { id } })).data;
+            return (await httpClient.get<void>("/cats/delete", { params: { id } })).data;
         },
     },
 };

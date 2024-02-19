@@ -1,10 +1,10 @@
 import { Button, Form, Input, Typography } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLoginMutation } from "./use-login-mutation";
-import { apiProvider } from "../api-provider";
 import { useProfileQuery } from "./use-profile-query";
 import { Navigate } from "react-router-dom";
 import { nav } from "../navigation/nav";
+import { motion } from "framer-motion";
 
 export function LoginForm() {
     const [login, setLogin] = useState("1");
@@ -12,9 +12,8 @@ export function LoginForm() {
     const loginMutation = useLoginMutation();
     const profileQuery = useProfileQuery();
 
-    console.log(profileQuery.data);
     if (profileQuery.data) {
-        return <Navigate to={nav.main} />;
+        return <Navigate to={nav.main} state={{ alreadyLogged: true }} />;
     }
 
     return (
@@ -30,7 +29,7 @@ export function LoginForm() {
                 <Button
                     type="primary"
                     htmlType="submit"
-                    disabled={loginMutation.isLoading}
+                    disabled={loginMutation.isLoading || profileQuery.isRefetching}
                     onClick={() => loginMutation.mutate({ login, password })}
                 >
                     Войти
