@@ -5,5 +5,7 @@ export function useProfileQuery() {
     return useQuery({
         queryKey: "profile",
         queryFn: apiProvider.auth.settings.get,
+        staleTime: Infinity,
+        cacheTime: Infinity,
     });
 }

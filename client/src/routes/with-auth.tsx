@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import { nav } from "../navigation/nav";
-import { useProfileQuery } from "./use-profile-query";
+import { useProfileQuery } from "../auth/use-profile-query";
 
 type Props = {};
 

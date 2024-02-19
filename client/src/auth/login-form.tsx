@@ -2,7 +2,7 @@ import { Button, Form, Input, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useLoginMutation } from "./use-login-mutation";
 import { apiProvider } from "../api-provider";
-import { useProfileQuery } from "../routes/use-profile-query";
+import { useProfileQuery } from "./use-profile-query";
 import { Navigate } from "react-router-dom";
 import { nav } from "../navigation/nav";
 
@@ -12,7 +12,8 @@ export function LoginForm() {
     const loginMutation = useLoginMutation();
     const profileQuery = useProfileQuery();
 
-    if (profileQuery.isSuccess) {
+    console.log(profileQuery.data);
+    if (profileQuery.data) {
         return <Navigate to={nav.main} />;
     }
 
