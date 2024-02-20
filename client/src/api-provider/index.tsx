@@ -1,7 +1,9 @@
 import { LoginResponse } from "@shared/types/auth/login-response";
 import { ILoginUser } from "@shared/types/auth/login-user.interface";
+import { IUser } from "@shared/types/auth/user.interface";
 import { IRegisterUser } from "@shared/types/auth/register-user.interface";
 import { httpClient } from "./axios";
+import { Cat } from "../cats-creation";
 
 export const apiProvider = {
     auth: {
@@ -19,5 +21,19 @@ export const apiProvider = {
                 return (await httpClient.get<void>("settings/profile")).data;
             },
         },
+    },
+    cats: {
+        async create(cat: Cat) {
+            (await httpClient.post<void>("/cats/create", cat)).data;
+        },
+        async getAll() {
+            return (await httpClient.get<Cat[]>("/cats")).data;
+        },
+        async delete(id: number) {
+            return (await httpClient.get<void>("/cats/delete", { params: { id } })).data;
+        },
+    },
+    async getAllUsers() {
+        return (await httpClient.get<IUser[]>("/users")).data;
     },
 };

@@ -3,27 +3,13 @@ import { Button, Checkbox, Form, Input, List, Typography } from "antd";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { httpClient } from "./api-provider/axios";
+import { apiProvider } from "./api-provider";
 
-type FieldType = {
+export type Cat = {
     id?: number;
     firstName?: string;
     lastName?: string;
     isActive?: boolean;
-};
-
-const provider = {
-    cats: {
-        async create(user: FieldType) {
-            (await httpClient.post<void>("/cats/create", user)).data;
-        },
-        async getAll() {
-            return (await httpClient.get<FieldType[]>("/cats")).data;
-        },
-        async delete(id: number) {
-            return (await httpClient.get<void>("/cats/delete", { params: { id } })).data;
-        },
-    },
 };
 
 export function CatsCreation() {
@@ -33,7 +19,7 @@ export function CatsCreation() {
 
     const queryClient = useQueryClient();
     const createUserMutation = useMutation<void, AxiosError<string>, void>({
-        mutationFn: () => provider.cats.create({ firstName, isActive, lastName }),
+        mutationFn: () => apiProvider.cats.create({ firstName, isActive, lastName }),
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: "getCats",
@@ -43,11 +29,11 @@ export function CatsCreation() {
 
     const getUsersQuery = useQuery({
         queryKey: "getCats",
-        queryFn: () => provider.cats.getAll(),
+        queryFn: () => apiProvider.cats.getAll(),
     });
 
     const useDeleteUserMutation = useMutation({
-        mutationFn: (id: number) => provider.cats.delete(id),
+        mutationFn: (id: number) => apiProvider.cats.delete(id),
         onSuccess(_data, id) {
             const previousUsers = queryClient.getQueryData<FieldType[]>(["getCats"]);
             queryClient.setQueryData(
@@ -88,17 +74,7 @@ export function CatsCreation() {
                 loading={getUsersQuery.isLoading}
                 dataSource={getUsersQuery.data}
                 renderItem={(item) => (
-                    <List.Item
-                        actions={[
-                            <Button
-                                shape="default"
-                                type="primary"
-                                style={{ right: 24 }}
-                                onClick={() => useDeleteUserMutation.mutate(item.id!)}
-                                icon={<CloseSquareOutlined />}
-                            />,
-                        ]}
-                    >
+                    <List.Item actions={[<CloseSquareOutlined onClick={() => useDeleteUserMutation.mutate(item.id!)} />]}>
                         {item.isActive && <Typography.Text mark>Активный</Typography.Text>} {item.firstName} {item.lastName}{" "}
                     </List.Item>
                 )}

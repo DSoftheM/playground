@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { nav } from "../navigation/nav";
 import { useProfileQuery } from "../auth/use-profile-query";
@@ -9,17 +9,24 @@ import { AnimatePresence, motion } from "framer-motion";
 export function WithAuth() {
     const profileQuery = useProfileQuery();
     const { state } = useLocation();
-    const [showAlert, setShowAlert] = useState(state.alreadyLogged);
+    const [showAlert, setShowAlert] = useState<boolean>(state?.alreadyLogged ?? false);
+    const navigate = useNavigate();
+
+    const timerId = useRef<number | undefined>(undefined);
 
     useEffect(() => {
-        setTimeout(() => {
+        timerId.current = window.setTimeout(() => {
             setShowAlert(false);
         }, 1500);
+        return () => {
+            clearTimeout(timerId.current);
+        };
     }, []);
 
     if (profileQuery.isLoading) return "Loading...";
     if (!profileQuery.data) {
-        return <Navigate to={nav.auth.login} />;
+        navigate(nav.auth.login);
+        return null;
     }
 
     const portal = createPortal(
@@ -37,7 +44,7 @@ export function WithAuth() {
                 </div>
             )}
         </AnimatePresence>,
-        document.querySelector("body")!
+        document.body
     );
 
     return (

@@ -5,5 +5,5 @@ export const nav = {
         register: "/register",
         login: "/login",
     },
-    perlin: "/perlin",
-};
+    allUsers: "/allUsers",
+} as const;

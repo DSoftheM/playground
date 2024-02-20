@@ -18,4 +18,8 @@ export class UsersService {
   async getUserByLogin(login: string) {
     return this.userRepository.findOneBy({ login });
   }
+
+  async getAllUsers() {
+    return this.userRepository.find();
+  }
 }

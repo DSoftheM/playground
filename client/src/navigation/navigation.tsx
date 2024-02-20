@@ -44,6 +44,7 @@ export function Navigation() {
                 <Link to={nav.catsCreation}>{nav.catsCreation}</Link>
                 <Link to={nav.auth.register}>{nav.auth.register}</Link>
                 <Link to={nav.auth.login}>{nav.auth.login}</Link>
+                <Link to={nav.allUsers}>{nav.allUsers}</Link>
             </Sidebar>
             <Content>
                 <Outlet />

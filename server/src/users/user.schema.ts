@@ -1,7 +1,8 @@
 import { Entity, EntitySchema } from 'typeorm';
+import { IUser } from '@shared/types/auth/user.interface';
 
 @Entity({ name: 'users' })
-export class User {
+export class User implements IUser {
   id: number;
   login: string;
   password: string;
