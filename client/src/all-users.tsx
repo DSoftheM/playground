@@ -4,6 +4,7 @@ import { Table, TableProps } from "antd";
 import { IUser } from "@shared/types/auth/user.interface";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { useGetAllUsersQuery } from "./use-get-all-users.query";
 
 function Password(props: { text: string }) {
     const [hover, setHover] = useState(false);
@@ -48,10 +49,7 @@ function Password(props: { text: string }) {
 }
 
 export function AllUsers() {
-    const getAllUsersQuery = useQuery({
-        queryKey: "getAllUsers",
-        queryFn: apiProvider.getAllUsers,
-    });
+    const getAllUsersQuery = useGetAllUsersQuery();
 
     const columns: TableProps<IUser>["columns"] = [
         { key: "id", title: "Id", dataIndex: "id", render: (value) => <p>{value}</p> },

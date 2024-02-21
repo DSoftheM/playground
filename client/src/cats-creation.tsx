@@ -1,25 +1,29 @@
-import { CloseSquareOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, List, Typography } from "antd";
+import { CloseSquareOutlined, DownOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Dropdown, Form, Input, List, Space, Typography } from "antd";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { apiProvider } from "./api-provider";
+import { useGetAllUsersQuery } from "./use-get-all-users.query";
+import { IUser } from "@shared/types/auth/user.interface";
 
 export type Cat = {
     id?: number;
     firstName?: string;
     lastName?: string;
     isActive?: boolean;
+    master?: IUser;
 };
 
 export function CatsCreation() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [isActive, setIsActive] = useState(false);
+    const [master, setMaster] = useState<IUser | null>(null);
 
     const queryClient = useQueryClient();
-    const createUserMutation = useMutation<void, AxiosError<string>, void>({
-        mutationFn: () => apiProvider.cats.create({ firstName, isActive, lastName }),
+    const createUserMutation = useMutation<void, AxiosError<string>, Cat>({
+        mutationFn: apiProvider.cats.create,
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: "getCats",
@@ -43,6 +47,12 @@ export function CatsCreation() {
         },
     });
 
+    const getAllUsersQuery = useGetAllUsersQuery();
+    const items = (getAllUsersQuery.data ?? []).map((u, i) => ({
+        label: <p onClick={() => setMaster(u)}>{u.login}</p>,
+        key: i.toString(),
+    }));
+
     return (
         <div>
             <Form layout="vertical" name="basic">
@@ -60,8 +70,26 @@ export function CatsCreation() {
                     </Checkbox>
                 </Form.Item>
 
+                <Form.Item<Cat> label="Хозяин кошки" name="master" rules={[{ required: true, message: "Выберите хозяина!" }]}>
+                    <Dropdown menu={{ items }} trigger={["click"]} arrow={{ pointAtCenter: true }}>
+                        <a onClick={(e) => e.preventDefault()}>
+                            <Button>
+                                {master?.login ?? "Не выбран"}
+                                <DownOutlined />
+                            </Button>
+                        </a>
+                    </Dropdown>
+                </Form.Item>
+
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" onClick={() => createUserMutation.mutate()}>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        onClick={() => {
+                            if (!master) return;
+                            createUserMutation.mutate({ firstName, isActive, lastName, master });
+                        }}
+                    >
                         Добавить
                     </Button>
                 </Form.Item>
