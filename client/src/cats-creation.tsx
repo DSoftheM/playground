@@ -35,7 +35,7 @@ export function CatsCreation() {
     const useDeleteUserMutation = useMutation({
         mutationFn: (id: number) => apiProvider.cats.delete(id),
         onSuccess(_data, id) {
-            const previousUsers = queryClient.getQueryData<FieldType[]>(["getCats"]);
+            const previousUsers = queryClient.getQueryData<Cat[]>(["getCats"]);
             queryClient.setQueryData(
                 "getCats",
                 previousUsers?.filter((user) => user.id !== id)
@@ -46,15 +46,15 @@ export function CatsCreation() {
     return (
         <div>
             <Form layout="vertical" name="basic">
-                <Form.Item<FieldType> label="Имя" name="firstName" rules={[{ required: true, message: "Введите имя!" }]}>
+                <Form.Item<Cat> label="Имя" name="firstName" rules={[{ required: true, message: "Введите имя!" }]}>
                     <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                 </Form.Item>
 
-                <Form.Item<FieldType> label="Фамилия" name="lastName" rules={[{ required: true, message: "Введите фамилию!" }]}>
+                <Form.Item<Cat> label="Фамилия" name="lastName" rules={[{ required: true, message: "Введите фамилию!" }]}>
                     <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
                 </Form.Item>
 
-                <Form.Item<FieldType> name="isActive" valuePropName="checked">
+                <Form.Item<Cat> name="isActive" valuePropName="checked">
                     <Checkbox value={isActive} onChange={(e) => setIsActive(e.target.checked)}>
                         Активный
                     </Checkbox>
