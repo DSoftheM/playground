@@ -17,7 +17,7 @@ export class CatsController {
   }
 
   @Get('/delete')
-  deleteUser(@Query('id', ParseIntPipe) id: number) {
+  deleteUser(@Query('id') id: string) {
     return this.catsService.delete(id);
   }
 }

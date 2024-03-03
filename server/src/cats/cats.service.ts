@@ -29,13 +29,13 @@ export class CatsService {
   }
 
   async create(cat: CreateCatDto) {
-    const user = await this.usersRepository.findOneBy({ id: cat.masterId });
-    if (!user) throw new BadRequestException();
-    const createdCat = await this.catsRepository.save({ firstName: cat.firstName, isActive: cat.isActive, lastName: cat.lastName, master: user });
+    const master = await this.usersRepository.findOneBy({ id: cat.masterId });
+    if (!master) throw new BadRequestException();
+    const createdCat = await this.catsRepository.save({ firstName: cat.firstName, isActive: cat.isActive, lastName: cat.lastName, master: master });
     return createdCat.id;
   }
 
-  async delete(userId: number) {
-    this.catsRepository.delete(userId);
+  async delete(catId: string) {
+    this.catsRepository.delete(catId);
   }
 }
