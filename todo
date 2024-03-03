@@ -1,3 +1,6 @@
 Server:
 Поискать eslint плагины для NestJs
 Добавить refresh_token
+
+Client:
+Добавить sidebar из ant https://ant.design/components/layout
