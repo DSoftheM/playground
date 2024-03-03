@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { SettingsModule } from './settings/settings.module';
 import { GlobalModule } from './global/global-module';
+import { EditorModule } from './editor/editor.module';
 
 @Module({
   imports: [
@@ -28,8 +29,12 @@ import { GlobalModule } from './global/global-module';
     AuthModule,
     UsersModule,
     SettingsModule,
+    EditorModule,
   ],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_FILTER, useClass: FilterException }],
+  providers: [
+    AppService,
+    // { provide: APP_FILTER, useClass: FilterException }
+  ],
 })
 export class AppModule {}

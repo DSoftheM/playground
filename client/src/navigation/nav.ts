@@ -6,4 +6,5 @@ export const nav = {
         login: "/login",
     },
     allUsers: "/allUsers",
+    editor: "/editor",
 } as const;

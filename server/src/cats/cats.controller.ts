@@ -12,8 +12,8 @@ export class CatsController {
   }
 
   @Post('/create')
-  create(@Body() user: CreateCatDto) {
-    return this.catsService.create(user);
+  async create(@Body() user: CreateCatDto) {
+    return await this.catsService.create(user);
   }
 
   @Get('/delete')

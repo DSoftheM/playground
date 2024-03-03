@@ -1,18 +1,18 @@
-import { CloseSquareOutlined, DownOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Dropdown, Form, Input, List, Space, Typography } from "antd";
+import { DownOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Dropdown, Form, Input, List, Typography } from "antd";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { apiProvider } from "./api-provider";
-import { useGetAllUsersQuery } from "./use-get-all-users.query";
+import { apiProvider } from "../api-provider";
+import { useGetAllUsersQuery } from "../use-get-all-users.query";
 import { IUser } from "@shared/types/auth/user.interface";
+import { CatListItem } from "./cat-list-item";
+import { ICatView } from "@shared/types/cats/cat-view.interface";
+import { ICatCreate } from "@shared/types/cats/cat-create.interface";
 
-export type Cat = {
-    id?: number;
-    firstName?: string;
-    lastName?: string;
-    isActive?: boolean;
-    master?: IUser;
+type CreateData = {
+    newCat: ICatCreate;
+    master: IUser;
 };
 
 export function CatsCreation() {
@@ -22,27 +22,31 @@ export function CatsCreation() {
     const [master, setMaster] = useState<IUser | null>(null);
 
     const queryClient = useQueryClient();
-    const createUserMutation = useMutation<void, AxiosError<string>, Cat>({
-        mutationFn: apiProvider.cats.create,
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: "getCats",
-            });
+    const createUserMutation = useMutation<string, AxiosError<string>, CreateData, string>({
+        mutationFn: (data) => apiProvider.cats.create(data.newCat),
+        onSuccess: (id, createData) => {
+            let previousCats = queryClient.getQueryData<ICatView[]>("getCats");
+            if (!previousCats) {
+                previousCats = [];
+            }
+            previousCats.push({ ...createData.newCat, id, master: createData.master });
         },
     });
 
-    const getUsersQuery = useQuery({
+    createUserMutation.data;
+
+    const getCatsQuery = useQuery({
         queryKey: "getCats",
         queryFn: () => apiProvider.cats.getAll(),
     });
 
-    const useDeleteUserMutation = useMutation({
-        mutationFn: (id: number) => apiProvider.cats.delete(id),
+    const useDeleteCatMutation = useMutation({
+        mutationFn: (id: string) => apiProvider.cats.delete(id),
         onSuccess(_data, id) {
-            const previousUsers = queryClient.getQueryData<Cat[]>(["getCats"]);
+            const previousCats = queryClient.getQueryData<ICatView[]>(["getCats"]);
             queryClient.setQueryData(
                 "getCats",
-                previousUsers?.filter((user) => user.id !== id)
+                previousCats?.filter((cat) => cat.id !== id)
             );
         },
     });
@@ -56,21 +60,25 @@ export function CatsCreation() {
     return (
         <div>
             <Form layout="vertical" name="basic">
-                <Form.Item<Cat> label="Имя" name="firstName" rules={[{ required: true, message: "Введите имя!" }]}>
+                <Form.Item<ICatCreate> label="Имя" name="firstName" rules={[{ required: true, message: "Введите имя!" }]}>
                     <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                 </Form.Item>
 
-                <Form.Item<Cat> label="Фамилия" name="lastName" rules={[{ required: true, message: "Введите фамилию!" }]}>
+                <Form.Item<ICatCreate> label="Фамилия" name="lastName" rules={[{ required: true, message: "Введите фамилию!" }]}>
                     <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
                 </Form.Item>
 
-                <Form.Item<Cat> name="isActive" valuePropName="checked">
+                <Form.Item<ICatCreate> name="isActive" valuePropName="checked">
                     <Checkbox value={isActive} onChange={(e) => setIsActive(e.target.checked)}>
                         Активный
                     </Checkbox>
                 </Form.Item>
 
-                <Form.Item<Cat> label="Хозяин кошки" name="master" rules={[{ required: true, message: "Выберите хозяина!" }]}>
+                <Form.Item<ICatCreate>
+                    label="Хозяин кошки"
+                    name="masterId"
+                    rules={[{ required: true, message: "Выберите хозяина!" }]}
+                >
                     <Dropdown menu={{ items }} trigger={["click"]} arrow={{ pointAtCenter: true }}>
                         <a onClick={(e) => e.preventDefault()}>
                             <Button>
@@ -87,7 +95,7 @@ export function CatsCreation() {
                         htmlType="submit"
                         onClick={() => {
                             if (!master) return;
-                            createUserMutation.mutate({ firstName, isActive, lastName, master });
+                            createUserMutation.mutate({ newCat: { firstName, isActive, lastName, masterId: master.id }, master });
                         }}
                     >
                         Добавить
@@ -98,14 +106,11 @@ export function CatsCreation() {
             </Form>
 
             <List
+                itemLayout="vertical"
                 bordered
-                loading={getUsersQuery.isLoading}
-                dataSource={getUsersQuery.data}
-                renderItem={(item) => (
-                    <List.Item actions={[<CloseSquareOutlined onClick={() => useDeleteUserMutation.mutate(item.id!)} />]}>
-                        {item.isActive && <Typography.Text mark>Активный</Typography.Text>} {item.firstName} {item.lastName}{" "}
-                    </List.Item>
-                )}
+                loading={getCatsQuery.isLoading}
+                dataSource={getCatsQuery.data}
+                renderItem={(catView) => <CatListItem item={catView} onDelete={() => useDeleteCatMutation.mutate(catView.id)} />}
             />
         </div>
     );

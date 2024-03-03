@@ -3,7 +3,7 @@ import { UsersService } from 'src/users/users.service';
 import { Repository } from 'typeorm';
 import { ReqUser } from './decorators/req-user.decorator';
 import { SetPublic } from 'src/global/set-public';
-import { CommonUser } from 'src/users/types/common-user';
+import { CommonUser } from 'src/users/common-user';
 
 @Controller('settings')
 export class SettingsController {

@@ -1,35 +1,41 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ApiConfigService } from 'src/app-config/api-config.service';
-import { CatEntity } from './cat.entity';
+import { CatSchema } from './cat.entity';
 import { Repository } from 'typeorm';
-import { CreateCatDto } from './cat.dto';
+import { CreateCatDto, ICat } from './cat.dto';
+import { UserSchema } from 'src/users/user.schema';
 
 @Injectable()
 export class CatsService {
   constructor(
     private apiConfigService: ApiConfigService,
-    @InjectRepository(CatEntity)
-    private usersRepository: Repository<CatEntity>,
+    @InjectRepository(CatSchema)
+    private catsRepository: Repository<ICat>,
+    @InjectRepository(UserSchema)
+    private usersRepository: Repository<UserSchema>,
   ) {}
 
   async findAll() {
-    return this.usersRepository.find();
+    return this.catsRepository.find({ relations: { master: true } });
   }
 
-  async findOne(id: number) {
-    return this.usersRepository.findOneBy({ id });
+  async findOne(id: string) {
+    return this.catsRepository.findOneBy({ id });
   }
 
   async remove(id: number) {
-    return this.usersRepository.delete(id);
+    return this.catsRepository.delete(id);
   }
 
-  async create(user: CreateCatDto) {
-    this.usersRepository.save([user]);
+  async create(cat: CreateCatDto) {
+    const user = await this.usersRepository.findOneBy({ id: cat.masterId });
+    if (!user) throw new BadRequestException();
+    const createdCat = await this.catsRepository.save({ firstName: cat.firstName, isActive: cat.isActive, lastName: cat.lastName, master: user });
+    return createdCat.id;
   }
 
   async delete(userId: number) {
-    this.usersRepository.delete(userId);
+    this.catsRepository.delete(userId);
   }
 }

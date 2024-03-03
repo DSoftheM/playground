@@ -22,7 +22,7 @@ export class AuthController {
   async loginUser(@Body() loginUserDTO: LoginUserDTO, @Res() res: Response): Promise<LoginResponse> {
     try {
       const { access_token } = await this.authService.loginUser(loginUserDTO);
-      res.setHeader('Set-Cookie', createCookie('access_token', access_token, { HttpOnly: true, expires: new Date(Date.now() + 60 * 10 * 1000) })).end();
+      res.setHeader('Set-Cookie', createCookie('access_token', access_token, { HttpOnly: true, expires: new Date(Date.now() + 60 * 60 * 24 * 7) })).end();
     } catch (error) {
       res.status(HttpStatus.BAD_REQUEST).write(error.message);
       res.end();

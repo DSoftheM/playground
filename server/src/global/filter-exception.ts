@@ -25,12 +25,17 @@ function getMessage(exception: Exception) {
 
 export class FilterException implements ExceptionFilter {
   catch(exception: Exception, host: ArgumentsHost) {
+    // return JSON.stringify(exception);
+    console.log('exception :>> ', exception.message);
     const response = host.switchToHttp().getResponse<Response>();
     const status = getStatus(exception);
 
     let message = '';
+    if (typeof exception.message === 'string') {
+      message = exception.message;
+    }
     // @ts-ignore
-    if (Array.isArray(exception.getResponse?.().message)) {
+    else if (Array.isArray(exception.getResponse?.().message)) {
       // @ts-ignore
       message = exception.getResponse().message.join(', ');
     } else if ((exception as QueryFailedError).message) {

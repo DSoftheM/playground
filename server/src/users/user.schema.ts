@@ -1,27 +1,14 @@
-import { Entity, EntitySchema } from 'typeorm';
+import { Column, Entity, EntitySchema, PrimaryGeneratedColumn } from 'typeorm';
 import { IUser } from '@shared/types/auth/user.interface';
 
-@Entity({ name: 'users' })
-export class User implements IUser {
+@Entity('users')
+export class UserSchema {
+  @PrimaryGeneratedColumn()
   id: number;
-  login: string;
+
+  @Column()
+  login: string; //  unique: true,
+
+  @Column()
   password: string;
 }
-
-export const UserSchema = new EntitySchema<User>({
-  name: 'users',
-  columns: {
-    id: {
-      type: Number,
-      generated: true,
-      primary: true,
-    },
-    login: {
-      type: String,
-      unique: true,
-    },
-    password: {
-      type: String,
-    },
-  },
-});

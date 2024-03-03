@@ -1,19 +1,27 @@
-import { CanActivate, ExecutionContext } from '@nestjs/common';
-import { IncomingMessage, ServerResponse } from 'http';
-import { Observable } from 'rxjs';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { UserSchema } from 'src/users/user.schema';
 
-@Entity({ name: 'cats' })
-export class CatEntity {
-  @PrimaryGeneratedColumn()
+interface IUser {
+  login: string;
+  password: string;
   id: number;
+}
+
+@Entity('cats')
+export class CatSchema {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   firstName: string;
 
   @Column()
+  isActive: boolean;
+
+  @Column()
   lastName: string;
 
-  @Column({ default: true })
-  isActive: boolean;
+  @OneToOne((type) => UserSchema)
+  @JoinColumn()
+  master: IUser;
 }
