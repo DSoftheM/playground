@@ -19,7 +19,7 @@ export const apiProvider = {
         },
         settings: {
             async get() {
-                return (await httpClient.get<void>("settings/profile")).data;
+                return (await httpClient.get<ILoginUser>("settings/profile")).data;
             },
         },
     },

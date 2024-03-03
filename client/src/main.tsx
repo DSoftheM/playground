@@ -3,6 +3,7 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { createGlobalStyle } from "styled-components";
+import { ConfigProvider } from "antd";
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false, refetchOnWindowFocus: false } } });
 
@@ -22,7 +23,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
         <QueryClientProvider client={queryClient}>
             <GlobalStyle />
-            <App />
+            <ConfigProvider theme={{ components: { Menu: {} } }}>
+                <App />
+            </ConfigProvider>
         </QueryClientProvider>
     </BrowserRouter>
 );

@@ -18,6 +18,6 @@ export class UsersService {
   }
 
   async getAllUsers() {
-    return this.userRepository.find({ select: { id: true, login: true } });
+    return this.userRepository.find();
   }
 }
