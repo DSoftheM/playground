@@ -42,6 +42,12 @@ export const apiProvider = {
         async getHtml(templateString: string) {
             return (await httpClient.post<string>("/editor/getHtml", { text: templateString })).data;
         },
+        async saveContext(context: Record<string, string>) {
+            return (await httpClient.post<string>("/editor/saveContext", { context })).data;
+        },
+        async getContext() {
+            return (await httpClient.get<Record<string, string>>("/editor/getContext")).data;
+        },
     },
     profile: {
         async uploadAvatar(formData: FormData) {

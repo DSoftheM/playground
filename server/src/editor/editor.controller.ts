@@ -13,9 +13,13 @@ export class EditorController {
     return this.editorService.getHtmlFromTemplate(template.text);
   }
 
-  @Get('/')
-  getHtmlFromTemplat1e() {
-    return 123;
+  @Post('saveContext')
+  async saveEditorContext(@Body('context') context: Record<string, string>) {
+    await this.editorService.saveContext(context);
+  }
+
+  @Get('getContext')
+  async getEditorContext() {
+    return await this.editorService.getContext();
   }
 }
-

@@ -1,3 +1,5 @@
 export enum QueryKey {
-    Profile = "profile",
+    Profile = "Profile",
+    Editor = "Editor",
+    GetEditorContext = "GetEditorContext",
 }

@@ -6,7 +6,7 @@ import { RegisterForm } from "./auth/register-form";
 import { LoginForm } from "./auth/login-form";
 import { WithAuth } from "./routes/with-auth";
 import { AllUsers } from "./all-users";
-import { MonacoEditor } from "./monaco-editor";
+import { MonacoEditor } from "./editor/monaco-editor";
 import { Profile } from "./profile/profile";
 
 function App() {
