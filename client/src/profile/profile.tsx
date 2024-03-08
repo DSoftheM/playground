@@ -1,14 +1,19 @@
 import { Button, Upload, UploadFile } from "antd";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { apiProvider } from "../api-provider";
 import { useState } from "react";
+import { QueryKey } from "../query-key";
 
 function useUploadAvatarMutation() {
+    const qc = useQueryClient();
     return useMutation({
         mutationFn: (file: UploadFile) => {
             const formData = new FormData();
             formData.append("file", file.originFileObj as Blob);
             return apiProvider.profile.uploadAvatar(formData);
+        },
+        onSuccess: () => {
+            qc.invalidateQueries(QueryKey.Profile);
         },
     });
 }

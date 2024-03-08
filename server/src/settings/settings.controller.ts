@@ -1,19 +1,22 @@
 import { BadRequestException, Controller, Get } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
-import { Repository } from 'typeorm';
 import { ReqUser } from './decorators/req-user.decorator';
-import { SetPublic } from 'src/global/set-public';
 import { CommonUser } from 'src/users/common-user';
+import { UserDTO } from 'src/users/user.dto';
+import { PATH } from 'src/global/constants';
 
 @Controller('settings')
 export class SettingsController {
   constructor(private usersService: UsersService) {}
 
   @Get('/profile')
-  async getProfile(@ReqUser() commonUser: CommonUser) {
+  async getProfile(@ReqUser() commonUser: CommonUser): Promise<UserDTO> {
     const user = await this.usersService.getUserByLogin(commonUser.login);
     if (!user) throw new BadRequestException();
-    const { password, ...restUser } = user;
-    return restUser;
+    return {
+      id: user.id,
+      login: user.login,
+      url: PATH.static.image(user.id),
+    };
   }
 }

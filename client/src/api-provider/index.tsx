@@ -5,6 +5,7 @@ import { IRegisterUser } from "@shared/types/auth/register-user.interface";
 import { httpClient } from "./axios";
 import { ICatView } from "@shared/types/cats/cat-view.interface";
 import { ICatCreate } from "@shared/types/cats/cat-create.interface";
+import { IUserDTO } from "@shared/types/auth/temp-user";
 
 export const apiProvider = {
     auth: {
@@ -19,7 +20,7 @@ export const apiProvider = {
         },
         settings: {
             async get() {
-                return (await httpClient.get<ILoginUser>("settings/profile")).data;
+                return (await httpClient.get<IUserDTO>("settings/profile")).data;
             },
         },
     },
@@ -44,7 +45,7 @@ export const apiProvider = {
     },
     profile: {
         async uploadAvatar(formData: FormData) {
-            return await httpClient.post("/profile/uploadAvatar", formData);
+            return await httpClient.post<void>("/profile/uploadAvatar", formData);
         },
     },
 };

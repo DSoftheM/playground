@@ -13,6 +13,9 @@ export default defineConfig({
     // vite server configs, for details see [vite doc](https://vitejs.dev/config/#server-host)
     port: 3001,
   },
+  define: {
+    __dirname,
+  },
   plugins: [
     ...VitePluginNode({
       adapter: 'nest',

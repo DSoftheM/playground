@@ -12,8 +12,6 @@ export class ProfileController {
       }),
     )
     file: Express.Multer.File,
-  ) {
-    console.log('file :>> ', file);
-  }
+  ) {}
 }
 

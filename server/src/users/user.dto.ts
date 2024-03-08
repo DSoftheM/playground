@@ -1,4 +1,3 @@
-import { IUser } from '@shared/types/auth/user.interface';
 import { IsNumber, IsString } from 'class-validator';
 
 export class UserDTO {
@@ -7,4 +6,6 @@ export class UserDTO {
 
   @IsNumber()
   id: number;
+
+  url: string;
 }

@@ -28,6 +28,7 @@
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/serve-static": "^4.0.1",
     "@nestjs/typeorm": "^10.0.2",
     "@shared": "file:../shared",
     "@swc/core": "^1.4.1",

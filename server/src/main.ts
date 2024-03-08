@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { ApiConfigService } from './app-config/api-config.service';
 import { ValidationPipe } from '@nestjs/common';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // if (import.meta.env.PROD) {
 async function bootstrap() {
