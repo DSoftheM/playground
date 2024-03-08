@@ -7,7 +7,7 @@ export function AppHeader() {
     const logoutMutation = useLogoutMutation();
     const profileQuery = useProfileQuery();
 
-    if (!profileQuery.data) return;
+    if (!profileQuery.data?.url) return;
 
     return (
         <Layout.Header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>

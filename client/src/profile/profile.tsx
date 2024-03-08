@@ -20,12 +20,19 @@ function useUploadAvatarMutation() {
 
 export function Profile() {
     const [avatar, setAvatar] = useState<UploadFile | null>(null);
+    console.log("avatar :>> ", avatar);
 
     const uploadAvatarMutation = useUploadAvatarMutation();
 
     return (
         <div>
-            <Upload listType="picture-circle" onChange={(data) => setAvatar(data.file)} maxCount={1} hasControlInside={false}>
+            <Upload
+                customRequest={({ file, onSuccess }) => onSuccess?.("ok")}
+                listType="picture-circle"
+                onChange={(data) => setAvatar(data.file)}
+                maxCount={1}
+                hasControlInside={false}
+            >
                 <Button type="link">Upload</Button>
             </Upload>
             <button onClick={() => avatar && uploadAvatarMutation.mutate(avatar)}>Save</button>
