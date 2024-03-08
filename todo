@@ -1,6 +1,7 @@
 Server:
 Поискать eslint плагины для NestJs
 Добавить refresh_token
+Добавить кастомный валидатор на название файла
 
 Client:
 Добавить sidebar из ant https://ant.design/components/layout

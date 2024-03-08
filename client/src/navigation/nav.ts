@@ -7,4 +7,5 @@ export const nav = {
     },
     allUsers: "/allUsers",
     editor: "/editor",
+    profile: "/profile",
 } as const;

@@ -10,6 +10,7 @@ import { UsersModule } from './users/users.module';
 import { SettingsModule } from './settings/settings.module';
 import { GlobalModule } from './global/global-module';
 import { EditorModule } from './editor/editor.module';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { EditorModule } from './editor/editor.module';
     UsersModule,
     SettingsModule,
     EditorModule,
+    ProfileModule,
   ],
   controllers: [AppController],
   providers: [

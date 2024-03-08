@@ -42,4 +42,9 @@ export const apiProvider = {
             return (await httpClient.post<string>("/editor/getHtml", { text: templateString })).data;
         },
     },
+    profile: {
+        async uploadAvatar(formData: FormData) {
+            return await httpClient.post("/profile/uploadAvatar", formData);
+        },
+    },
 };
