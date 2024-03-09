@@ -15,19 +15,19 @@ function contextToRecord(context: EditorContextEntity[]) {
 export class EditorService {
   constructor(@InjectRepository(EditorContextEntity) private contextRepository: Repository<EditorContextEntity>) {}
 
-  async saveContext(context: Record<string, string>) {
-    const data = Object.keys(context).map((name) => ({ name, value: context[name] }));
-    await this.contextRepository.clear();
+  async saveContext(userId: number, context: Record<string, string>) {
+    const data: EditorContextEntity[] = Object.keys(context).map((name) => ({ name, value: context[name], userId }));
+    await this.contextRepository.delete({ userId });
     await this.contextRepository.save(data);
   }
 
-  async getContext() {
-    return this.contextRepository.find().then(contextToRecord);
+  async getContext(userId: number) {
+    return this.contextRepository.find({ where: { userId } }).then(contextToRecord);
   }
 
-  async getHtmlFromTemplate(templateString: string) {
+  async getHtmlFromTemplate(userId: number, templateString: string) {
     const template = hbs.compile(templateString);
-    const context = await this.contextRepository.find();
+    const context = await this.contextRepository.find({ where: { userId } });
     return template(contextToRecord(context));
   }
 }

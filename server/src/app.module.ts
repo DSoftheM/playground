@@ -31,6 +31,7 @@ import { serverRoot } from './global/constants';
       username: 'postgres',
       password: 'postgres',
       database: 'users',
+      // logging: true,
       entities: [],
       synchronize: true,
       autoLoadEntities: true,

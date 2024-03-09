@@ -20,7 +20,6 @@ function useUploadAvatarMutation() {
 
 export function Profile() {
     const [avatar, setAvatar] = useState<UploadFile | null>(null);
-    console.log("avatar :>> ", avatar);
 
     const uploadAvatarMutation = useUploadAvatarMutation();
 

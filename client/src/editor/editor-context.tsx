@@ -82,9 +82,11 @@ export function EditorContext(props: Props) {
                 </Flex>
             </Form>
             <Flex gap="small" wrap="wrap" style={{ marginTop: 10 }}>
-                <Button onClick={() => saveEditorContextMutation.mutate(record)}>Сохранить контекст</Button>
+                <Button type="primary" onClick={() => saveEditorContextMutation.mutate(record)}>
+                    Сохранить{" "}
+                </Button>
                 <Button
-                    type="primary"
+                    type="dashed"
                     onClick={() => {
                         updateContext((draft) => {
                             draft[uuid()] = { name: "", value: "" };

@@ -1,8 +1,14 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'editorContext' })
 export class EditorContextEntity {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
+  id?: string;
+
+  @Column()
+  userId: number;
+
+  @Column()
   name: string;
 
   @Column()
