@@ -15,6 +15,11 @@ export class EditorController {
     return this.editorService.getHtmlFromTemplate(user.id, template.text);
   }
 
+  @Post('getPdf')
+  getPdfFromTemplate(@Body() template: EditorTemplateDto, @ReqUser() user: UserDTO) {
+    return this.editorService.getPdfFromTemplate(user.id, template.text);
+  }
+
   @Post('saveContext')
   async saveEditorContext(@Body('context') context: Record<string, string>, @ReqUser() user: UserDTO) {
     await this.editorService.saveContext(user.id, context);

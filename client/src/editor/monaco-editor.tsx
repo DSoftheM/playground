@@ -9,6 +9,7 @@ import useDebounce from "../hooks/use-debounce";
 import { uuid } from "../lib/uuid";
 import { EditorContext } from "./editor-context";
 import { QueryKey } from "../query-key";
+import { defaultText } from "./editor-lib";
 
 const Body = styled.div`
     display: flex;
@@ -22,10 +23,15 @@ const Body = styled.div`
 `;
 
 export function MonacoEditor() {
-    const [text, setText] = useState("");
+    const [text, setText] = useState(defaultText);
     const debouncedText = useDebounce(text, 300);
 
-    const templateQuery = useQuery({
+    // const templatePdfQuery = useQuery({
+    //     queryFn: () => apiProvider.editor.getPdf(text),
+    //     queryKey: [QueryKey.Editor, debouncedText],
+    // });
+
+    const templateHtmlQuery = useQuery({
         queryFn: () => apiProvider.editor.getHtml(text),
         queryKey: [QueryKey.Editor, debouncedText],
     });
@@ -48,7 +54,14 @@ export function MonacoEditor() {
                             onChange={(x) => setText(x ?? "")}
                         />
                     </div>
-                    <div dangerouslySetInnerHTML={{ __html: templateQuery.data ?? "" }}></div>
+                    <div>
+                        HTML
+                        <div dangerouslySetInnerHTML={{ __html: templateHtmlQuery.data ?? "" }}></div>
+                    </div>
+                    {/* <div>
+                        PDF
+                        <canvas></canvas>
+                    </div> */}
                 </Body>
             </Flex>
         </div>

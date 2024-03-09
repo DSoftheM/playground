@@ -42,6 +42,9 @@ export const apiProvider = {
         async getHtml(templateString: string) {
             return (await httpClient.post<string>("/editor/getHtml", { text: templateString })).data;
         },
+        async getPdf(templateString: string) {
+            return (await httpClient.post<string>("/editor/getPdf", { text: templateString })).data;
+        },
         async saveContext(context: Record<string, string>) {
             return (await httpClient.post<string>("/editor/saveContext", { context })).data;
         },
