@@ -8,4 +8,5 @@ export const nav = {
     allUsers: "/allUsers",
     editor: "/editor",
     profile: "/profile",
+    actionBar: "/actionBar",
 } as const;

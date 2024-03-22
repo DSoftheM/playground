@@ -8,6 +8,7 @@ import { WithAuth } from "./routes/with-auth";
 import { AllUsers } from "./all-users";
 import { MonacoEditor } from "./editor/monaco-editor";
 import { Profile } from "./profile/profile";
+import { ActionBar } from "./action-bar/action-bar";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path={nav.catsCreation} element={<CatsCreation />} />
                     <Route path={nav.allUsers} element={<AllUsers />} />
                     <Route path={nav.profile} element={<Profile />} />
+                    <Route path={nav.actionBar} element={<ActionBar />} />
                 </Route>
                 <Route path={nav.editor} element={<MonacoEditor />} />
             </Route>

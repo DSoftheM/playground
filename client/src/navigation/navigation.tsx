@@ -37,7 +37,7 @@ const Content = styled.div`
     grid-area: content;
 `;
 
-const links = [nav.catsCreation, nav.auth.register, nav.auth.login, nav.allUsers, nav.editor, nav.profile];
+const links = [nav.catsCreation, nav.auth.register, nav.auth.login, nav.allUsers, nav.editor, nav.profile, nav.actionBar];
 
 export function Navigation() {
     const navigate = useNavigate();
