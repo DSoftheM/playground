@@ -21,7 +21,7 @@ import { serverRoot } from './global/constants';
       rootPath: path.join(serverRoot, 'static'),
       serveRoot: '/static',
       serveStaticOptions: {
-        fallthrough: false,
+        fallthrough: true,
       },
     }),
     TypeOrmModule.forRoot({

@@ -7,6 +7,9 @@ export default defineConfig({
     plugins: [react()],
     envDir: "./src/config/env",
     mode: "development",
+    build: {
+        outDir: "../build/client",
+    },
     // resolve: {
     //     alias: {
     //         "@shared": path.resolve(__dirname, "../shared"),

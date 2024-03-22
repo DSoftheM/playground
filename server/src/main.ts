@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const apiConfigService = app.get(ApiConfigService);
-  const port = apiConfigService.port;
+  const port = apiConfigService.port || 3001;
 
   app.enableCors({ credentials: true, origin: 'http://localhost:5173' });
 
@@ -21,7 +21,7 @@ async function bootstrap() {
     }),
   );
 
-  // await app.listen(port);
+  await app.listen(port, () => console.log('Server started:', port));
 }
 bootstrap();
 // }
@@ -37,3 +37,5 @@ viteNodeApp.then((app) => {
     }),
   );
 });
+
+// viteNodeApp.then(x => x.listen(3001, () => console.log('Server started:', port || 3001)))

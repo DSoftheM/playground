@@ -1,7 +1,6 @@
 import { BadRequestException, Controller, Get } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { ReqUser } from './decorators/req-user.decorator';
-import { CommonUser } from 'src/users/common-user';
 import { UserDTO } from 'src/users/user.dto';
 import { PATH } from 'src/global/constants';
 
@@ -10,7 +9,7 @@ export class SettingsController {
   constructor(private usersService: UsersService) {}
 
   @Get('/profile')
-  async getProfile(@ReqUser() commonUser: CommonUser): Promise<UserDTO> {
+  async getProfile(@ReqUser() commonUser: UserDTO): Promise<UserDTO> {
     const user = await this.usersService.getUserByLogin(commonUser.login);
     if (!user) throw new BadRequestException();
     return {

@@ -15,10 +15,7 @@ class CustomPipe implements PipeTransform {
 export class AppController {
   @SetPublic()
   @Get('/')
-  getHello(@Param('id', CustomPipe) id: boolean) {
-    return {
-      typeof: typeof id,
-      value: id,
-    };
+  getIndex() {
+    return 123;
   }
 }

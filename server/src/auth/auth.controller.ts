@@ -4,8 +4,8 @@ import { UsersService } from '../users/users.service';
 import { LoginUserDTO } from './dto/login-user.dto';
 import { AuthService } from './auth.service';
 import { SetPublic } from 'src/global/set-public';
-import { Response } from 'express';
 import { LoginResponse } from '@shared/types/auth/login-response';
+import e from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -19,7 +19,7 @@ export class AuthController {
 
   @Post('/login')
   @SetPublic()
-  async loginUser(@Body() loginUserDTO: LoginUserDTO, @Res() res: Response): Promise<LoginResponse> {
+  async loginUser(@Body() loginUserDTO: LoginUserDTO, @Res() res: e.Response): Promise<LoginResponse> {
     try {
       const { access_token } = await this.authService.loginUser(loginUserDTO);
       res.setHeader('Set-Cookie', createCookie('access_token', access_token, { HttpOnly: true, expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000) })).end();
@@ -31,7 +31,7 @@ export class AuthController {
   }
 
   @Get('/logout')
-  async logoutUser(@Res() res: Response) {
+  async logoutUser(@Res() res: e.Response) {
     res.setHeader('Set-Cookie', createCookie('access_token', '', { HttpOnly: true, 'max-age': -1 })).end();
   }
 }
