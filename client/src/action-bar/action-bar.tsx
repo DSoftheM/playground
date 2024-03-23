@@ -7,36 +7,39 @@ import { Paper } from "./paper";
 
 const actions = Array.from({ length: 10 }, (_, i) => `Item ${i}`);
 
+type Action = {
+    el: HTMLElement;
+    index: number;
+};
+
 export function ActionBar() {
     const [intersectionIndex, setIntersectionIndex] = useState<number | null>(null);
-    const actionsRef = useRef<HTMLDivElement | null>(null);
+    const actionsRef = useRef<Action[]>([]);
     const scopeRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         if (!actionsRef.current) return;
         if (!scopeRef.current) return;
 
-        const buttons = Array.from(actionsRef.current.children);
-        buttons.forEach((btn, btnIndex) => {
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        const { isIntersecting } = entry;
-                        console.log(isIntersecting);
-                        if (!isIntersecting) {
-                            setIntersectionIndex(btnIndex);
-                        } else {
-                            // console.log(intersectionIndex, btnIndex);
-                            if ((intersectionIndex ?? -1) < btnIndex) {
-                                setIntersectionIndex(btnIndex + 1);
-                            }
-                        }
-                    });
-                },
-                { root: scopeRef.current, threshold: 1 }
-            );
-            observer.observe(btn);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                console.log(entries.map((e) => e.intersectionRatio));
+                const lastIntersectingItem = entries.find((e) => e.intersectionRatio < 1);
+                const hisIndex = actionsRef.current.find((a) => a.el === lastIntersectingItem?.target)?.index ?? null;
+                if (hisIndex === null) {
+                    setIntersectionIndex((prev) => (prev ?? -1) + 1);
+                } else {
+                    setIntersectionIndex(hisIndex);
+                }
+            },
+            { root: scopeRef.current, threshold: [1] }
+        );
+
+        actionsRef.current.forEach(({ el }) => {
+            observer.observe(el);
         });
+
+        return () => observer.disconnect();
     }, []);
 
     const visibleActions = actions.slice(0, intersectionIndex ?? undefined);
@@ -48,7 +51,7 @@ export function ActionBar() {
             return (
                 <Paper indent={5}>
                     {invisibleActions.map((a) => (
-                        <p style={{ cursor: "pointer" }} onClick={() => alert(a)}>
+                        <p key={a} style={{ cursor: "pointer" }} onClick={() => alert(a)}>
                             <Typography.Text>{a}</Typography.Text>
                         </p>
                     ))}
@@ -58,10 +61,9 @@ export function ActionBar() {
     });
 
     return (
-        <S.Resize ref={scopeRef}>
-            <p>intersectionIndex = {intersectionIndex}</p>
+        <S.Resize ref={scopeRef} style={{ width: 500 }}>
+            <p style={{ color: "wheat" }}>intersectionIndex = {intersectionIndex}</p>
             <S.ButtonGroup
-                ref={actionsRef}
                 style={{
                     position: "absolute",
                     left: 0,
@@ -72,7 +74,13 @@ export function ActionBar() {
                 }}
             >
                 {actions.map((a, i) => (
-                    <Button key={a} type={i === intersectionIndex ? "primary" : "dashed"} onClick={() => {}} color="red">
+                    <Button
+                        ref={(el) => el && actionsRef.current.push({ el, index: i })}
+                        key={a}
+                        type={i === intersectionIndex ? "primary" : "dashed"}
+                        onClick={() => {}}
+                        color="red"
+                    >
                         {a}
                     </Button>
                 ))}
@@ -86,7 +94,6 @@ export function ActionBar() {
                 {invisibleActions.length > 0 && (
                     <div>
                         <Button
-                            // style={{ width: 32 }}
                             ref={popover.ref}
                             type="primary"
                             icon={<SmallDashOutlined />}
