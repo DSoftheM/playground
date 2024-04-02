@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { SmallDashOutlined } from "@ant-design/icons";
 import { usePopover } from "./use-popover";
 import { Paper } from "./paper";
+import { Resizable } from "./use-resizable";
 
 const actions = Array.from({ length: 10 }, (_, i) => `Item ${i}`);
 
@@ -23,7 +24,6 @@ export function ActionBar() {
 
         const observer = new IntersectionObserver(
             (entries) => {
-                console.log(entries.map((e) => e.intersectionRatio));
                 const lastIntersectingItem = entries.find((e) => e.intersectionRatio < 1);
                 const hisIndex = actionsRef.current.find((a) => a.el === lastIntersectingItem?.target)?.index ?? null;
                 if (hisIndex === null) {
@@ -62,7 +62,9 @@ export function ActionBar() {
 
     return (
         <S.Resize ref={scopeRef} style={{ width: 500 }}>
-            <p style={{ color: "wheat" }}>intersectionIndex = {intersectionIndex}</p>
+            <Resizable>
+                <p style={{ color: "wheat" }}>intersectionIndex = {intersectionIndex}</p>
+            </Resizable>
             <S.ButtonGroup
                 style={{
                     position: "absolute",

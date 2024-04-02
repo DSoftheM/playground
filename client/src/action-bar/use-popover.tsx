@@ -24,7 +24,7 @@ export function usePopover(props: UsePopoverProps) {
 
         const coords = ref.current.getBoundingClientRect();
         console.log("coords :>> ", coords);
-        const x = coords.right - coords.width * 1.5;
+        const x = coords.left;
         const y = coords.bottom;
 
         const portal = createPortal(
