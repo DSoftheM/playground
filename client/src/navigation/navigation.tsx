@@ -36,6 +36,8 @@ const Content = styled.div`
     padding: 10px;
     grid-area: content;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 `;
 
 const links = [
@@ -66,12 +68,6 @@ export function Navigation() {
                 <Sider>
                     <Menu mode="inline" items={items} />
                 </Sider>
-                {/* <Link to={nav.catsCreation}>{nav.catsCreation}</Link>
-                <Link to={nav.auth.register}>{nav.auth.register}</Link>
-                <Link to={nav.auth.login}>{nav.auth.login}</Link>
-                <Link to={nav.allUsers}>{nav.allUsers}</Link>
-                <Link to={nav.editor}>{nav.editor}</Link> 
-                */}
             </Sidebar>
             <Content>
                 <Outlet />
