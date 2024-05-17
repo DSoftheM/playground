@@ -35,9 +35,21 @@ const Sidebar = styled.div`
 const Content = styled.div`
     padding: 10px;
     grid-area: content;
+    overflow: auto;
 `;
 
-const links = [nav.catsCreation, nav.auth.register, nav.auth.login, nav.allUsers, nav.editor, nav.profile, nav.actionBar];
+const links = [
+    nav.catsCreation,
+    nav.auth.register,
+    nav.auth.login,
+    nav.allUsers,
+    nav.editor,
+    nav.profile,
+    nav.actionBar,
+    nav.tabs,
+    nav.cloud,
+    nav.maze,
+];
 
 export function Navigation() {
     const navigate = useNavigate();

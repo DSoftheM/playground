@@ -9,4 +9,7 @@ export const nav = {
     editor: "/editor",
     profile: "/profile",
     actionBar: "/actionBar",
+    tabs: "/tabs",
+    cloud: "/cloud",
+    maze: "/maze",
 } as const;

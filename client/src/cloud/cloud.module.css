@@ -1,0 +1,10 @@
+.root {
+    word-break: break-all;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.word {
+    border: 1px solid #000;
+}

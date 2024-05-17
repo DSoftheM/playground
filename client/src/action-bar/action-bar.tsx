@@ -62,9 +62,9 @@ export function ActionBar() {
 
     return (
         <S.Resize ref={scopeRef} style={{ width: 500 }}>
-            <Resizable>
+            {/* <Resizable>
                 <p style={{ color: "wheat" }}>intersectionIndex = {intersectionIndex}</p>
-            </Resizable>
+            </Resizable> */}
             <S.ButtonGroup
                 style={{
                     position: "absolute",

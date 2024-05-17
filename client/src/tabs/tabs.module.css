@@ -1,0 +1,50 @@
+.root {
+    position: relative;
+    border: 1px solid #000;
+    width: 300px;
+
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
+
+.wrapper {
+    overflow: auto;
+}
+
+.tabsRoot {
+    display: flex;
+    gap: 12px;
+    padding: 10px;
+}
+
+.tab {
+    cursor: pointer;
+    white-space: nowrap;
+    background-color: peachpuff;
+
+    &:hover {
+        background-color: slateblue;
+    }
+}
+
+.tab[data-selected="true"] {
+    border-bottom: 1px solid #000;
+}
+
+.arrow {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+
+    &[data-direction="left"] {
+        left: 0;
+        background-color: sienna;
+    }
+
+    &[data-direction="right"] {
+        right: 0;
+        background-color: sienna;
+    }
+}

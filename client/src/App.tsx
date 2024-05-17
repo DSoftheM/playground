@@ -9,6 +9,9 @@ import { AllUsers } from "./all-users";
 import { MonacoEditor } from "./editor/monaco-editor";
 import { Profile } from "./profile/profile";
 import { ActionBar } from "./action-bar/action-bar";
+import { Tabs } from "./tabs/tabs";
+import { Cloud } from "./cloud/cloud";
+import { Maze } from "./maze/maze";
 
 function App() {
     return (
@@ -20,6 +23,10 @@ function App() {
                     <Route path={nav.allUsers} element={<AllUsers />} />
                     <Route path={nav.profile} element={<Profile />} />
                     <Route path={nav.actionBar} element={<ActionBar />} />
+                    <Route path={nav.tabs} element={<Tabs />} />
+                    <Route path={nav.tabs} element={<Tabs />} />
+                    <Route path={nav.cloud} element={<Cloud />} />
+                    <Route path={nav.maze} element={<Maze />} />
                 </Route>
                 <Route path={nav.editor} element={<MonacoEditor />} />
             </Route>
