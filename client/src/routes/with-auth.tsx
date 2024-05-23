@@ -48,7 +48,7 @@ export function WithAuth() {
     );
 
     return (
-        <div>
+        <div style={{ flexGrow: 1 }}>
             <Outlet />
             {portal}
         </div>

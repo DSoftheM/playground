@@ -12,6 +12,9 @@ import { ProfileModule } from './profile/profile.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import path from 'path';
 import { serverRoot } from './global/constants';
+import { MediaViewerModule } from './media-viewer/media-viewer.module';
+import { Stats } from 'fs';
+import { Response } from 'express';
 
 @Module({
   imports: [
@@ -22,6 +25,17 @@ import { serverRoot } from './global/constants';
       serveRoot: '/static',
       serveStaticOptions: {
         fallthrough: true,
+        setHeaders(res: Response, pathLine: string, stats: Stats) {
+          const type = (() => {
+            const t = res.req.query['type'];
+            if (t === 'attachment') return 'attachment';
+            if (t === 'inline') return 'inline';
+            return null;
+          })();
+
+          if (!type) return;
+          res.set('Content-Disposition', `${type}; filename=${path.basename(pathLine)}`);
+        },
       },
     }),
     TypeOrmModule.forRoot({
@@ -41,6 +55,7 @@ import { serverRoot } from './global/constants';
     SettingsModule,
     EditorModule,
     ProfileModule,
+    MediaViewerModule,
   ],
   controllers: [AppController],
   providers: [

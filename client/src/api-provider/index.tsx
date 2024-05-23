@@ -57,4 +57,14 @@ export const apiProvider = {
             return await httpClient.post<void>("/profile/uploadAvatar", formData);
         },
     },
+    features: {
+        mediaViewer: {
+            async getSamplePdf(type: "link" | "stream") {
+                return (await httpClient.get("/mediaViewer/getPdf", { params: { type } })).data;
+            },
+            async getBinaryImage(url: string) {
+                return (await httpClient.get(url)).data;
+            },
+        },
+    },
 };

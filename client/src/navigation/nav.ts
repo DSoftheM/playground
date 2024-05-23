@@ -13,4 +13,5 @@ export const nav = {
     cloud: "/cloud",
     maze: "/maze",
     virtualList: "/virtualList",
+    mediaViewer: "/mediaViewer",
 } as const;

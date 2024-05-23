@@ -16,7 +16,9 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         overflow: hidden;
+        font-family: Segoe UI;
     }
+
 `;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -29,4 +31,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </QueryClientProvider>
     </BrowserRouter>
 );
-

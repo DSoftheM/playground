@@ -52,6 +52,7 @@ const links = [
     nav.cloud,
     nav.maze,
     nav.virtualList,
+    nav.mediaViewer,
 ];
 
 export function Navigation() {
