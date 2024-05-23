@@ -12,6 +12,7 @@ import { ActionBar } from "./action-bar/action-bar";
 import { Cloud } from "./cloud/cloud";
 import { Maze } from "./maze/maze";
 import { TabsStory } from "./tabs/tabs.story";
+import { VirtualList } from "./virtual-list/virtual-list";
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                     <Route path={nav.tabs} element={<TabsStory />} />
                     <Route path={nav.cloud} element={<Cloud />} />
                     <Route path={nav.maze} element={<Maze />} />
+                    <Route path={nav.virtualList} element={<VirtualList />} />
                 </Route>
                 <Route path={nav.editor} element={<MonacoEditor />} />
             </Route>

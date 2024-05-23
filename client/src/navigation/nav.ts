@@ -12,4 +12,5 @@ export const nav = {
     tabs: "/tabs",
     cloud: "/cloud",
     maze: "/maze",
+    virtualList: "/virtualList",
 } as const;

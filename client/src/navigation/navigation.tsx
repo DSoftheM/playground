@@ -51,6 +51,7 @@ const links = [
     nav.tabs,
     nav.cloud,
     nav.maze,
+    nav.virtualList,
 ];
 
 export function Navigation() {

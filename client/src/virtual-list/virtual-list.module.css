@@ -1,0 +1,3 @@
+.test:placeholder-shown + div {
+    color: red;
+}
