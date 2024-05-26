@@ -14,4 +14,5 @@ export const nav = {
     maze: "/maze",
     virtualList: "/virtualList",
     mediaViewer: "/mediaViewer",
+    gameCrud: "/gameCrud",
 } as const;

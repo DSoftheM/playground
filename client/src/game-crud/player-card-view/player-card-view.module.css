@@ -1,0 +1,14 @@
+.card {
+    box-shadow: 1px 1px 2px 0px #00000099;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.01);
+        background-color: #d1eaff;
+    }
+}

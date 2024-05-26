@@ -5,6 +5,16 @@ import { Link } from "../ui/link";
 import { AppHeader } from "./app-header";
 import Sider from "antd/es/layout/Sider";
 import { Menu, MenuProps } from "antd";
+import { createNanoEvents } from "nanoevents";
+import { useEffect } from "react";
+import { useImmer } from "use-immer";
+import { createPortal } from "react-dom";
+import {
+    Notification,
+    NotificationView,
+    NotificationsContainer,
+    useNotifications,
+} from "../features/notifications/notifications";
 
 type Props = {};
 
@@ -53,6 +63,7 @@ const links = [
     nav.maze,
     nav.virtualList,
     nav.mediaViewer,
+    nav.gameCrud,
 ];
 
 export function Navigation() {
@@ -61,8 +72,21 @@ export function Navigation() {
         { key: -1, label: "Test", children: links.map((link, i) => ({ key: i, label: link, onClick: () => navigate(link) })) },
     ];
 
+    const { notifications } = useNotifications();
+    const renderNotifications = () => {
+        return createPortal(
+            <NotificationsContainer>
+                {notifications.map((n) => (
+                    <NotificationView key={n.id} notification={n} />
+                ))}
+            </NotificationsContainer>,
+            document.body
+        );
+    };
+
     return (
         <Root>
+            {renderNotifications()}
             <Header>
                 <AppHeader />
             </Header>

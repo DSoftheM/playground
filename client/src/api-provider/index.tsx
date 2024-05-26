@@ -6,6 +6,7 @@ import { httpClient } from "./axios";
 import { ICatView } from "@shared/types/cats/cat-view.interface";
 import { ICatCreate } from "@shared/types/cats/cat-create.interface";
 import { IUserDTO } from "@shared/types/auth/temp-user";
+import { IPlayerCreate } from "@shared/types/game-crud/player-create.interface";
 
 export const apiProvider = {
     auth: {
@@ -64,6 +65,17 @@ export const apiProvider = {
             },
             async getBinaryImage(url: string) {
                 return (await httpClient.get(url)).data;
+            },
+        },
+        gameCrud: {
+            async createPlayer(data: IPlayerCreate) {
+                return (await httpClient.post("/game-crud/createPlayer", data)).data;
+            },
+            async deletePlayer(playerId: string) {
+                return (await httpClient.post("/game-crud/deletePlayer", { playerId })).data;
+            },
+            async getAllPlayers() {
+                return (await httpClient.get("/game-crud/getAllPlayers")).data;
             },
         },
     },

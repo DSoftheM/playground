@@ -1,0 +1,30 @@
+.container {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.notification {
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.notification {
+    background-color: rgb(124, 193, 249);
+}
+
+.notification[data-type="success"] {
+    background-color: rgb(140, 232, 114);
+}
+
+.notification[data-type="warning"] {
+    background-color: yellow;
+}
+
+.notification[data-type="danger"] {
+    background-color: red;
+    color: #fff;
+}

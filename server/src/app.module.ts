@@ -15,6 +15,7 @@ import { serverRoot } from './global/constants';
 import { MediaViewerModule } from './media-viewer/media-viewer.module';
 import { Stats } from 'fs';
 import { Response } from 'express';
+import { GameCrudModule } from './game-crud/game-crud.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { Response } from 'express';
     EditorModule,
     ProfileModule,
     MediaViewerModule,
+    GameCrudModule,
   ],
   controllers: [AppController],
   providers: [
