@@ -15,6 +15,7 @@ import { TabsStory } from "./tabs/tabs.story";
 import { VirtualList } from "./virtual-list/virtual-list";
 import { MediaViewer } from "./media-viewer/media-viewer";
 import { GameCrud } from "./game-crud/game-crud";
+import { UseInfiniteQuery } from "./features/use-infinite-query/use-infinite-query";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                     <Route path={nav.virtualList} element={<VirtualList />} />
                     <Route path={nav.mediaViewer} element={<MediaViewer />} />
                     <Route path={nav.gameCrud} element={<GameCrud />} />
+                    <Route path={nav.features.useInfiniteQuery} element={<UseInfiniteQuery />} />
                 </Route>
                 <Route path={nav.editor} element={<MonacoEditor />} />
             </Route>

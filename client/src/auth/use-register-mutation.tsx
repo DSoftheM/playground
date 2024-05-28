@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import { apiProvider } from "../api-provider";
 import { AxiosError } from "axios";
 import { IRegisterUser } from "@shared/types/auth/register-user.interface";

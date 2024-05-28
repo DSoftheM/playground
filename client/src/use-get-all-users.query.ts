@@ -1,9 +1,9 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { apiProvider } from "./api-provider";
 
 export const useGetAllUsersQuery = () => {
     return useQuery({
-        queryKey: "getAllUsers",
+        queryKey: ["getAllUsers"],
         queryFn: apiProvider.getAllUsers,
     });
 };

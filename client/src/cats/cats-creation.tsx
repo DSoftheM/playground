@@ -2,7 +2,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Dropdown, Form, Input, List, Typography } from "antd";
 import { AxiosError } from "axios";
 import { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { apiProvider } from "../api-provider";
 import { useGetAllUsersQuery } from "../use-get-all-users.query";
 import { IUser } from "@shared/types/auth/user.interface";
@@ -25,7 +25,7 @@ export function CatsCreation() {
     const createUserMutation = useMutation<string, AxiosError<string>, CreateData, string>({
         mutationFn: (data) => apiProvider.cats.create(data.newCat),
         onSuccess: (id, createData) => {
-            let previousCats = queryClient.getQueryData<ICatView[]>("getCats");
+            let previousCats = queryClient.getQueryData<ICatView[]>(["getCats"]);
             if (!previousCats) {
                 previousCats = [];
             }
@@ -33,10 +33,8 @@ export function CatsCreation() {
         },
     });
 
-    createUserMutation.data;
-
     const getCatsQuery = useQuery({
-        queryKey: "getCats",
+        queryKey: ["getCats"],
         queryFn: () => apiProvider.cats.getAll(),
     });
 
@@ -45,7 +43,7 @@ export function CatsCreation() {
         onSuccess(_data, id) {
             const previousCats = queryClient.getQueryData<ICatView[]>(["getCats"]);
             queryClient.setQueryData(
-                "getCats",
+                ["getCats"],
                 previousCats?.filter((cat) => cat.id !== id)
             );
         },

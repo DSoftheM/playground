@@ -1,6 +1,5 @@
 import { ENV } from "../config/env";
 
-/** См. https://support.servicenow.com/kb?id=kb_article_view&sysparm_article=KB0727127 */
 export function getRefreshImage(url: string) {
     return getPath(url) + `?${Date.now()}`;
 }

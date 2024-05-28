@@ -15,4 +15,7 @@ export const nav = {
     virtualList: "/virtualList",
     mediaViewer: "/mediaViewer",
     gameCrud: "/gameCrud",
+    features: {
+        useInfiniteQuery: "/use-infinite-query",
+    },
 } as const;

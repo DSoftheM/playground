@@ -64,6 +64,7 @@ const links = [
     nav.virtualList,
     nav.mediaViewer,
     nav.gameCrud,
+    nav.features.useInfiniteQuery,
 ];
 
 export function Navigation() {

@@ -59,6 +59,12 @@ export const apiProvider = {
         },
     },
     features: {
+        jsonPlaceholder: {
+            async todos(data: { skip: number; count: number }) {
+                const todos: any[] = (await httpClient.get("https://jsonplaceholder.typicode.com/todos", { baseURL: "" })).data;
+                return todos.slice(data.skip, data.skip + data.count);
+            },
+        },
         mediaViewer: {
             async getSamplePdf(type: "link" | "stream") {
                 return (await httpClient.get("/mediaViewer/getPdf", { params: { type } })).data;

@@ -1,5 +1,5 @@
 import { Editor } from "@monaco-editor/react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiProvider } from "../api-provider";
 import { useState } from "react";
 import styled from "styled-components";

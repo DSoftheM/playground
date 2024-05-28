@@ -1,7 +1,7 @@
 import { Button, Flex, Form, Input, Typography } from "antd";
 import { uuid } from "../lib/uuid";
 import { useImmer } from "use-immer";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiProvider } from "../api-provider";
 import { QueryKey } from "../query-key";
 import { PlusOutlined } from "@ant-design/icons";

@@ -15,7 +15,7 @@ export function AppHeader() {
                 <Avatar style={{ backgroundColor: "#f56a00" }} src={getRefreshImage(profileQuery.data.url)} />
                 <Menu mode="horizontal" />
             </div>
-            <Button type="primary" loading={logoutMutation.isLoading} onClick={() => logoutMutation.mutate()}>
+            <Button type="primary" loading={logoutMutation.isPending} onClick={() => logoutMutation.mutate()}>
                 Выйти
             </Button>
         </Layout.Header>

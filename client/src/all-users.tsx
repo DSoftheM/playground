@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { apiProvider } from "./api-provider";
 import { Table, TableProps } from "antd";
 import { IUser } from "@shared/types/auth/user.interface";

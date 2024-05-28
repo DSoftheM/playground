@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { ReactQueryKey } from "../../react-query";
 import { apiProvider } from "../../api-provider";
 import { closeNotification, createNotification } from "../../features/notifications/notifications";

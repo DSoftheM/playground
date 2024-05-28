@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiProvider } from "../../api-provider";
 import { IPlayerCreate } from "@shared/types/game-crud/player-create.interface";
 import { ReactQueryKey } from "../../react-query";

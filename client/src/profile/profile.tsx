@@ -1,5 +1,5 @@
 import { Button, Upload, UploadFile } from "antd";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiProvider } from "../api-provider";
 import { useState } from "react";
 import { QueryKey } from "../query-key";
