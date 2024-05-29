@@ -14,7 +14,7 @@ type Params = {
     count: number;
 };
 
-export const useInfiniteTodos = (step: number) => {
+const useInfiniteTodos = (step: number) => {
     return useInfiniteQuery<Todo[], Error, InfiniteData<Todo[], Params>, QueryKey, Params>({
         queryKey: [ReactQueryKey.UseInfiniteQueryList],
         initialPageParam: {
@@ -41,10 +41,9 @@ export const useInfiniteTodos = (step: number) => {
 
 export function UseListInfiniteQuery() {
     const infiniteQuery = useInfiniteTodos(23);
+    const queryClient = useQueryClient();
 
     if (!infiniteQuery.data) return "!data";
-
-    const queryClient = useQueryClient();
 
     return (
         <div>
@@ -63,9 +62,6 @@ export function UseListInfiniteQuery() {
                     }
                 }}
             >
-                {/* {Array.from({ length: 200 }, (_, i) => (
-                    <li key={i}>{i}</li>
-                ))} */}
                 {infiniteQuery.data.pages.flatMap((page) => {
                     return page.map((x) => {
                         return (
@@ -76,9 +72,6 @@ export function UseListInfiniteQuery() {
                     });
                 })}
             </List>
-
-            {/* <p>infiniteQuery.isFetching = {infiniteQuery.isFetching + ""}</p>
-            <p>infiniteQuery.hasNextPage = {infiniteQuery.hasNextPage + ""}</p> */}
         </div>
     );
 }
