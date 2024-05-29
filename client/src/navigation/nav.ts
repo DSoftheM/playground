@@ -1,3 +1,5 @@
+import { useParams } from "react-router-dom";
+
 export const nav = {
     main: "/",
     catsCreation: "/catsCreation",
@@ -14,8 +16,18 @@ export const nav = {
     maze: "/maze",
     virtualList: "/virtualList",
     mediaViewer: "/mediaViewer",
-    gameCrud: "/gameCrud",
     features: {
         useInfiniteQuery: "/use-infinite-query",
+        gameCrud: {
+            root: "/gameCrud",
+            player: {
+                get: (id: string) => `/gameCrud/${id}`,
+                pattern: `/gameCrud/:playerId`,
+            },
+        },
     },
 } as const;
+
+export const usePlayerId = () => {
+    return useParams() as { playerId: string };
+};

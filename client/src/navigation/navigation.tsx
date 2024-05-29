@@ -1,22 +1,11 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { nav } from "./nav";
-import { Link } from "../ui/link";
 import { AppHeader } from "./app-header";
 import Sider from "antd/es/layout/Sider";
 import { Menu, MenuProps } from "antd";
-import { createNanoEvents } from "nanoevents";
-import { useEffect } from "react";
-import { useImmer } from "use-immer";
 import { createPortal } from "react-dom";
-import {
-    Notification,
-    NotificationView,
-    NotificationsContainer,
-    useNotifications,
-} from "../features/notifications/notifications";
-
-type Props = {};
+import { NotificationView, NotificationsContainer, useNotifications } from "../features/notifications/notifications";
 
 const Root = styled.div`
     display: grid;
@@ -63,7 +52,7 @@ const links = [
     nav.maze,
     nav.virtualList,
     nav.mediaViewer,
-    nav.gameCrud,
+    nav.features.gameCrud.root,
     nav.features.useInfiniteQuery,
 ];
 

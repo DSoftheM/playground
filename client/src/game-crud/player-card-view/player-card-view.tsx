@@ -4,24 +4,29 @@ import { Avatar } from "antd";
 import { CloseOutlined, LoadingOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion";
 import { useDeletePlayerMutation } from "../player-creation-api/use-delete-player-mutation";
+import { Link } from "react-router-dom";
+import { nav } from "../../navigation/nav";
 
 type PlayerCardViewProps = {
     player: IPlayer;
+    // onClick: () => void
 };
 
 export const PlayerCardView = (props: PlayerCardViewProps) => {
     const deleteMutation = useDeletePlayerMutation();
 
     return (
-        <motion.div className={css.card}>
-            <Avatar />
-            <p>{props.player.name}</p>
+        <Link to={nav.features.gameCrud.player.get(props.player.id)}>
+            <motion.div className={css.card}>
+                <Avatar />
+                <p>{props.player.name}</p>
 
-            {deleteMutation.isLoading ? (
-                <LoadingOutlined />
-            ) : (
-                <CloseOutlined onClick={() => deleteMutation.mutate(props.player.id)} />
-            )}
-        </motion.div>
+                {deleteMutation.isPending ? (
+                    <LoadingOutlined />
+                ) : (
+                    <CloseOutlined onClick={() => deleteMutation.mutate(props.player.id)} />
+                )}
+            </motion.div>
+        </Link>
     );
 };

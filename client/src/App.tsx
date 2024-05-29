@@ -32,7 +32,10 @@ function App() {
                     <Route path={nav.maze} element={<Maze />} />
                     <Route path={nav.virtualList} element={<VirtualList />} />
                     <Route path={nav.mediaViewer} element={<MediaViewer />} />
-                    <Route path={nav.gameCrud} element={<GameCrud />} />
+
+                    <Route path={nav.features.gameCrud.root} element={<GameCrud />} />
+                    <Route path={nav.features.gameCrud.player.pattern} element={<GameCrud />} />
+
                     <Route path={nav.features.useInfiniteQuery} element={<UseInfiniteQuery />} />
                 </Route>
                 <Route path={nav.editor} element={<MonacoEditor />} />
