@@ -1,5 +1,5 @@
 import { CheckOutlined, CloseOutlined, CloseSquareOutlined } from "@ant-design/icons";
-import { List, Typography } from "antd";
+import { List } from "antd";
 import { ICatView } from "@shared/types/cats/cat-view.interface";
 
 type Props = {

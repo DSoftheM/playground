@@ -7,6 +7,7 @@ import { ICatView } from "@shared/types/cats/cat-view.interface";
 import { ICatCreate } from "@shared/types/cats/cat-create.interface";
 import { IUserDTO } from "@shared/types/auth/temp-user";
 import { IPlayerCreate } from "@shared/types/game-crud/player-create.interface";
+import { Todo } from "../features/use-infinite-query/use-infinite-query";
 
 export const apiProvider = {
     auth: {
@@ -61,7 +62,7 @@ export const apiProvider = {
     features: {
         jsonPlaceholder: {
             async todos(data: { skip: number; count: number }) {
-                const todos: any[] = (
+                const todos: Todo[] = (
                     await httpClient.get("https://jsonplaceholder.typicode.com/todos", { baseURL: "", params: data })
                 ).data;
                 return todos.slice(data.skip, data.skip + data.count);

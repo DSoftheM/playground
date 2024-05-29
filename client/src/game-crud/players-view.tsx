@@ -17,6 +17,8 @@ export function PlayersView() {
             </Typography.Text>
         );
 
+    console.log(getPlayersQuery.data);
+
     return (
         <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             {getPlayersQuery.data?.map((player) => (

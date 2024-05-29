@@ -8,18 +8,25 @@ import { useRef } from "react";
 export const useGetAllPlayersQuery = () => {
     const notificationId = useRef<string | null>(null);
 
+    const close = () => {
+        if (notificationId.current) closeNotification(notificationId.current);
+        notificationId.current = null;
+    };
+
     const q = useQuery<IPlayer[]>({
         queryKey: [ReactQueryKey.GetAllPlayers],
         queryFn: () => {
             return apiProvider.features.gameCrud
                 .getAllPlayers()
                 .then((data) => {
-                    if (notificationId.current) closeNotification(notificationId.current);
-                    notificationId.current = null;
-
+                    close();
                     return data;
                 })
-                .catch((err) => createNotification({ message: "Не удалось загрузить список игроков", type: "danger" }));
+                .catch((err) => {
+                    close();
+                    createNotification({ message: "Не удалось загрузить список игроков", type: "danger" });
+                    throw err;
+                });
         },
         behavior: {
             onFetch(context) {
