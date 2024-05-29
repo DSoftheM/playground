@@ -1,9 +1,11 @@
 import { InfiniteData, QueryKey, useInfiniteQuery } from "@tanstack/react-query";
-import { apiProvider } from "../../api-provider";
-import { Button, Flex, Space } from "antd";
+import { Button, Flex, Space, Tabs } from "antd";
 import { useState } from "react";
-import { ReactQueryKey } from "../../react-query";
 import css from "./use-infinite-query.module.css";
+import { UsePaginatedInfiniteQuery } from "./paginated/use-paginated-infinite-query";
+import { ReactQueryKey } from "../../react-query";
+import { apiProvider } from "../../api-provider";
+import { UseListInfiniteQuery } from "./list/use-list-infinite-query";
 
 type Todo = {
     id: string;
@@ -62,40 +64,12 @@ export function UseInfiniteQuery() {
 
     return (
         <div>
-            <Flex>
-                <Button
-                    onClick={() => {
-                        if (!infiniteQuery.data.pages[page - 1]) {
-                            infiniteQuery.fetchPreviousPage();
-                        }
-                        setPage(page - 1);
-                    }}
-                    disabled={page === 0 || !infiniteQuery.hasPreviousPage || infiniteQuery.isFetchingPreviousPage}
-                    loading={infiniteQuery.isFetchingPreviousPage}
-                >
-                    Пред. страница
-                </Button>
-                <div className={css.page}>{page}</div>
-                <Button
-                    onClick={() => {
-                        if (!infiniteQuery.data.pages[page + 1]) {
-                            infiniteQuery.fetchNextPage();
-                        }
-                        setPage(page + 1);
-                    }}
-                    disabled={!infiniteQuery.hasNextPage || infiniteQuery.isFetchingNextPage}
-                    loading={infiniteQuery.isFetchingNextPage}
-                >
-                    След. страница
-                </Button>
-            </Flex>
-            <div>
-                {infiniteQuery.data.pages[page]?.map((x) => (
-                    <li key={x.id}>
-                        {x.id} {x.title}
-                    </li>
-                ))}
-            </div>
+            <Tabs
+                items={[
+                    { key: "1", children: <UsePaginatedInfiniteQuery />, label: "Paginated" },
+                    { key: "2", children: <UseListInfiniteQuery />, label: "List" },
+                ]}
+            />
         </div>
     );
 }

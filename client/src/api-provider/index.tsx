@@ -61,7 +61,9 @@ export const apiProvider = {
     features: {
         jsonPlaceholder: {
             async todos(data: { skip: number; count: number }) {
-                const todos: any[] = (await httpClient.get("https://jsonplaceholder.typicode.com/todos", { baseURL: "" })).data;
+                const todos: any[] = (
+                    await httpClient.get("https://jsonplaceholder.typicode.com/todos", { baseURL: "", params: data })
+                ).data;
                 return todos.slice(data.skip, data.skip + data.count);
             },
         },

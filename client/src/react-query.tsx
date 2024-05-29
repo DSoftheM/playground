@@ -9,5 +9,6 @@ export const ReactQueryProvider = (props: PropsWithChildren) => {
 
 export enum ReactQueryKey {
     GetAllPlayers = "GetAllPlayers",
-    UseInfiniteQuery = "UseInfiniteQuery",
+    UseInfiniteQueryList = "UseInfiniteQueryList",
+    UseInfiniteQueryPaginated = "UseInfiniteQueryPaginated",
 }
