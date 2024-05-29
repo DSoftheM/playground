@@ -22,6 +22,8 @@ export function PlayersView() {
             {getPlayersQuery.data?.map((player) => (
                 <PlayerCardView player={player} key={player.id} />
             ))}
+
+            {!getPlayersQuery.data?.length && <Typography.Title type="secondary">Нет игроков</Typography.Title>}
         </div>
     );
 }

@@ -11,20 +11,20 @@ export const useGetAllPlayersQuery = () => {
     const q = useQuery<IPlayer[]>({
         queryKey: [ReactQueryKey.GetAllPlayers],
         queryFn: () => {
-            return apiProvider.features.gameCrud.getAllPlayers();
+            return apiProvider.features.gameCrud
+                .getAllPlayers()
+                .then((data) => {
+                    if (notificationId.current) closeNotification(notificationId.current);
+                    notificationId.current = null;
+
+                    return data;
+                })
+                .catch((err) => createNotification({ message: "Не удалось загрузить список игроков", type: "danger" }));
         },
         behavior: {
             onFetch(context) {
                 notificationId.current = createNotification({ message: "Обновление списка...", type: "neutral" });
             },
-        },
-        onSuccess() {
-            if (notificationId.current) closeNotification(notificationId.current);
-            notificationId.current = null;
-        },
-        onError(err) {
-            console.log(err);
-            createNotification({ message: "Не удалось загрузить список игроков", type: "danger" });
         },
     });
 
