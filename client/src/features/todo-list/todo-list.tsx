@@ -17,7 +17,7 @@ export function TodoList() {
     return (
         <div>
             <Input value={title} onChange={(ev) => setTitle(ev.target.value)} placeholder="Заголовок" />
-            <Input value={text} onChange={(ev) => setText(ev.target.value)} placeholder="Текст" />
+            <Input.TextArea value={text} onChange={(ev) => setText(ev.target.value)} placeholder="Текст" />
             <Button onClick={onCreate} disabled={!title}>
                 Создать
             </Button>
