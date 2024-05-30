@@ -9,6 +9,7 @@ import { ICreateTodo } from "@shared/types/todo-list/create-todo.interface";
 import { IUserDTO } from "@shared/types/auth/temp-user";
 import { IPlayerCreate } from "@shared/types/game-crud/player-create.interface";
 import { Todo } from "../features/use-infinite-query/use-infinite-query";
+import { IViewTodo } from "@shared/types/todo-list/view-todo.interface";
 
 export const apiProvider = {
     auth: {
@@ -97,6 +98,9 @@ export const apiProvider = {
             },
             async createTodo(todo: ICreateTodo) {
                 return (await httpClient.post(`/todo-list/create-todo`, todo)).data;
+            },
+            async updateTodo(todo: IViewTodo) {
+                return (await httpClient.post(`/todo-list/update-todo`, todo)).data;
             },
         },
     },

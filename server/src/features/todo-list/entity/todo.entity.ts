@@ -12,6 +12,9 @@ export class TodoEntity implements IViewTodo {
   @Column()
   text: string;
 
+  @Column({ default: false })
+  done: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 }

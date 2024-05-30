@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useTodoListQuery } from "./api/use-todo-list-query";
 import { Button, Input } from "antd";
 import { useCreateTodoMutation } from "./api/use-create-todo-mutation";
+import { useUpdateTodoMutation } from "./api/use-update-todo-mutation";
 
 export function TodoList() {
     const todoListQuery = useTodoListQuery();
     const createTodoMutation = useCreateTodoMutation();
+    const updateTodoMutation = useUpdateTodoMutation();
 
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
@@ -23,9 +25,16 @@ export function TodoList() {
             </Button>
             {todoListQuery.data?.map((todo) => {
                 return (
-                    <div key={todo.id}>
+                    <div key={todo.id} style={todo.done ? { textDecoration: "line-through" } : {}}>
                         {todo.title}
                         {todo.text}
+                        <button
+                            onClick={() => {
+                                updateTodoMutation.mutate({ ...todo, done: true });
+                            }}
+                        >
+                            Done
+                        </button>
                     </div>
                 );
             })}
