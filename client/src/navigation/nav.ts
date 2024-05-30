@@ -14,8 +14,9 @@ export const nav = {
     tabs: "/tabs",
     cloud: "/cloud",
     maze: "/maze",
-    virtualList: "/virtualList",
-    mediaViewer: "/mediaViewer",
+    virtualList: "/virtual-list",
+    mediaViewer: "/media-viewer",
+    todoList: "/todo-list",
     features: {
         useInfiniteQuery: "/use-infinite-query",
         gameCrud: {

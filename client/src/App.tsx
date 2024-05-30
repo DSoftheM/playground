@@ -16,6 +16,7 @@ import { VirtualList } from "./virtual-list/virtual-list";
 import { MediaViewer } from "./media-viewer/media-viewer";
 import { GameCrud } from "./game-crud/game-crud";
 import { UseInfiniteQuery } from "./features/use-infinite-query/use-infinite-query";
+import { TodoList } from "./features/todo-list/todo-list";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                     <Route path={nav.maze} element={<Maze />} />
                     <Route path={nav.virtualList} element={<VirtualList />} />
                     <Route path={nav.mediaViewer} element={<MediaViewer />} />
+                    <Route path={nav.todoList} element={<TodoList />} />
 
                     <Route path={nav.features.gameCrud.root} element={<GameCrud />} />
                     <Route path={nav.features.gameCrud.player.pattern} element={<GameCrud />} />

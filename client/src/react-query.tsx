@@ -20,4 +20,5 @@ export enum ReactQueryKey {
     GetPlayer = "GetPlayer",
     UseInfiniteQueryList = "UseInfiniteQueryList",
     UseInfiniteQueryPaginated = "UseInfiniteQueryPaginated",
+    TodoList = "TodoList",
 }

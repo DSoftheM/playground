@@ -5,6 +5,7 @@ import { IRegisterUser } from "@shared/types/auth/register-user.interface";
 import { httpClient } from "./axios";
 import { ICatView } from "@shared/types/cats/cat-view.interface";
 import { ICatCreate } from "@shared/types/cats/cat-create.interface";
+import { ICreateTodo } from "@shared/types/todo-list/create-todo.interface";
 import { IUserDTO } from "@shared/types/auth/temp-user";
 import { IPlayerCreate } from "@shared/types/game-crud/player-create.interface";
 import { Todo } from "../features/use-infinite-query/use-infinite-query";
@@ -88,6 +89,14 @@ export const apiProvider = {
             },
             async getPlayer(id: string) {
                 return (await httpClient.get(`/game-crud/1getPlayer/${id}`)).data;
+            },
+        },
+        todoList: {
+            async get() {
+                return (await httpClient.get(`/todo-list`)).data;
+            },
+            async createTodo(todo: ICreateTodo) {
+                return (await httpClient.post(`/todo-list/create-todo`, todo)).data;
             },
         },
     },

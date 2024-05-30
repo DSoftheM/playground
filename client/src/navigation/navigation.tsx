@@ -40,6 +40,7 @@ const Content = styled.div`
 `;
 
 const links = [
+    nav.todoList,
     nav.catsCreation,
     nav.auth.register,
     nav.auth.login,
