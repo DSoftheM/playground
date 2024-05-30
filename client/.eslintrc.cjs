@@ -9,6 +9,8 @@ module.exports = {
         "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
         "@typescript-eslint/no-unused-vars": "warn",
         "unused-imports/no-unused-imports": "warn",
+        "react-refresh/only-export-components": "off",
+        "react-hooks/exhaustive-deps": "off",
     },
 };
 

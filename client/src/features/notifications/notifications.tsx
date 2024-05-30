@@ -4,11 +4,13 @@ import { useImmer } from "use-immer";
 import css from "./notifications.module.css";
 import { uuid } from "../../lib/uuid";
 import { AnimatePresence, motion } from "framer-motion";
+import { zIndex } from "../../z-index";
 
 export type Notification = {
     id: string;
     message: string;
     type?: "neutral" | "success" | "warning" | "danger";
+    details?: string;
 };
 
 type NotificationViewProps = {
@@ -51,7 +53,7 @@ export const useNotifications = () => {
             const timerId = window.setTimeout(() => {
                 removeNotification(notification.id);
                 delete timers.current[notification.id];
-            }, 3_000);
+            }, 3_0000);
             timers.current[notification.id] = timerId;
         });
 
@@ -71,8 +73,18 @@ export const useNotifications = () => {
 };
 
 export function NotificationView(props: NotificationViewProps) {
+    const onDetailsClick = () => {
+        const blob = new Blob([props.notification.details ?? ""]);
+
+        const url = URL.createObjectURL(blob);
+        window.open(url);
+    };
+
+    console.log(ArrayBuffer);
+
     return (
         <motion.div
+            style={{ zIndex: zIndex.Notification }}
             key={props.notification.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -80,6 +92,7 @@ export function NotificationView(props: NotificationViewProps) {
         >
             <div className={css.notification} data-type={props.notification.type}>
                 {props.notification.message}
+                {Boolean(props.notification.details) && <p onClick={onDetailsClick}>Подробнее</p>}
             </div>
         </motion.div>
     );

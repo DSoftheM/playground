@@ -19,5 +19,9 @@ export class GameCrudService {
   deletePlayer(id: string) {
     this.playerRepository.delete({ id });
   }
+
+  findPlayer(id: string) {
+    return this.playerRepository.findOneBy({ id });
+  }
 }
 

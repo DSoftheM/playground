@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { SetPublic } from 'src/global/set-public';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -25,6 +25,11 @@ export class GameCrudController {
   @Post('/deletePlayer')
   deletePlayer(@Body() dto: DeletePlayerDto) {
     this.gameCrudService.deletePlayer(dto.playerId);
+  }
+
+  @Get('/getPlayer/:playerId')
+  getPlayer(@Param('playerId') playerId: string) {
+    return this.gameCrudService.findPlayer(playerId);
   }
 }
 

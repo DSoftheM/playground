@@ -5,7 +5,7 @@ import { CloseOutlined, LoadingOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion";
 import { useDeletePlayerMutation } from "../player-creation-api/use-delete-player-mutation";
 import { Link } from "react-router-dom";
-import { nav } from "../../navigation/nav";
+import { nav, usePlayerId } from "../../navigation/nav";
 
 type PlayerCardViewProps = {
     player: IPlayer;
@@ -14,10 +14,11 @@ type PlayerCardViewProps = {
 
 export const PlayerCardView = (props: PlayerCardViewProps) => {
     const deleteMutation = useDeletePlayerMutation();
+    const { playerId } = usePlayerId();
 
     return (
         <Link to={nav.features.gameCrud.player.get(props.player.id)}>
-            <motion.div className={css.card}>
+            <motion.div className={css.card} data-selected={playerId === props.player.id}>
                 <Avatar />
                 <p>{props.player.name}</p>
 

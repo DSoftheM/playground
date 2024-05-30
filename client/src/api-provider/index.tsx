@@ -87,7 +87,7 @@ export const apiProvider = {
                 return (await httpClient.get("/game-crud/getAllPlayers")).data;
             },
             async getPlayer(id: string) {
-                return (await httpClient.get(`/game-crud/getPlayer/${id}`)).data;
+                return (await httpClient.get(`/game-crud/1getPlayer/${id}`)).data;
             },
         },
     },

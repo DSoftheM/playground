@@ -11,4 +11,8 @@
         transform: scale(1.01);
         background-color: #d1eaff;
     }
+
+    &[data-selected="true"] {
+        background-color: #a1d3fc;
+    }
 }

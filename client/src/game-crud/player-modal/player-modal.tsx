@@ -4,24 +4,47 @@ import { useOutsideClick } from "../../hooks/use-on-click-outside";
 import { useNavigate } from "react-router-dom";
 import { nav, usePlayerId } from "../../navigation/nav";
 import { usePlayerQuery } from "../player-creation-api/use-player-query";
-import { Skeleton } from "antd";
+import { Skeleton, Typography } from "antd";
 
 export function PlayerModal() {
     const navigate = useNavigate();
-    const ref = useOutsideClick(() => navigate(nav.features.gameCrud.root));
+    const close = () => navigate(nav.features.gameCrud.root);
+    const ref = useOutsideClick(close);
     const { playerId } = usePlayerId();
     const playerQuery = usePlayerQuery(playerId);
 
     const renderContent = () => {
-        if (playerQuery.isLoading || true) return <Skeleton />;
+        if (playerQuery.isLoading) return <Skeleton />;
 
         return (
             <>
-                <img src="" alt="" />
+                <Typography.Title className={css.title}>lorem dfa werfwe f</Typography.Title>
+                <img
+                    className={css.avatar}
+                    src="https://i0.wp.com/picjumbo.com/wp-content/uploads/camping-on-top-of-the-mountain-during-sunset-free-photo.jpg?w=600&quality=80"
+                />
                 <p>
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum praesentium sint dolorum quibusdam, illo
                     voluptas reiciendis vero recusandae explicabo similique. Esse nostrum illum fuga, fugiat temporibus quidem
-                    nulla velit autem.
+                    nulla velit autem.psum dolor, sit amet consectetur adipisicing elit. Eum praesentium sint dolorum quibusdam,
+                    illo voluptas reiciendis vero recusandae explicabo similique. Esse nostrum illum fuga, fugiat temporibus
+                    quidem nulla velit autem.psum dolor, sit amet consectetur adipisicing elit. Eum praesentium sint dolorum
+                    quibusdam, illo voluptas reiciendis vero recusandae explicabo similique. Esse nostrum illum fuga, fugiat
+                    temporibus quidem nulla velit autem.psum dolor, sit amet consectetur adipisicing elit. Eum praesentium sint
+                    dolorum quibusdam, illo voluptas reiciendis vero recusandae explicabo similique. Esse nostrum illum fuga,
+                    fugiat temporibus quidem nulla velit autem.psum dolor, sit amet consectetur adipisicing elit. Eum praesentium
+                    sint dolorum quibusdam, illo voluptas reiciendis vero recusandae explicabo similique. Esse nostrum illum fuga,
+                    fugiat temporibus quidem nulla velit autem.psum dolor, sit amet consectetur adipisicing elit. Eum praesentium
+                    sint dolorum quibusdam, illo voluptas reiciendis vero recusandae explicabo similique. Esse nostrum illum fuga,
+                    fugiat temporibus quidem nulla velit autem.psum dolor, sit amet consectetur adipisicing elit. Eum praesentium
+                    sint dolorum quibusdam, illo voluptas reiciendis vero recusandae explicabo similique. Esse nostrum illum fuga,
+                    fugiat temporibus quidem nulla velit autem.psum dolor, sit amet consectetur adipisicing elit. Eum praesentium
+                    sint dolorum quibusdam, illo voluptas reiciendis vero recusandae explicabo similique. Esse nostrum illum fuga,
+                    fugiat temporibus quidem nulla velit autem.psum dolor, sit amet consectetur adipisicing elit. Eum praesentium
+                    sint dolorum quibusdam, illo voluptas reiciendis vero recusandae explicabo similique. Esse nostrum illum fuga,
+                    fugiat temporibus quidem nulla velit autem.psum dolor, sit amet consectetur adipisicing elit. Eum praesentium
+                    sint dolorum quibusdam, illo voluptas reiciendis vero recusandae explicabo similique. Esse nostrum illum fuga,
+                    fugiat temporibus quidem nulla velit autem.
                 </p>
             </>
         );
