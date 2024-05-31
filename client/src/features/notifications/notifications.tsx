@@ -80,8 +80,6 @@ export function NotificationView(props: NotificationViewProps) {
         window.open(url);
     };
 
-    console.log(ArrayBuffer);
-
     return (
         <motion.div
             style={{ zIndex: zIndex.Notification }}

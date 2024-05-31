@@ -29,7 +29,7 @@ export function LoginForm() {
                     <Button
                         type="primary"
                         htmlType="submit"
-                        disabled={loginMutation.isLoading || profileQuery.isRefetching}
+                        disabled={loginMutation.isPending || profileQuery.isRefetching}
                         onClick={() => loginMutation.mutate({ login, password })}
                     >
                         Войти

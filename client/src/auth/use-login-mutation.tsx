@@ -12,7 +12,7 @@ export function useLoginMutation() {
         mutationFn: apiProvider.auth.login,
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: QueryKey.Profile,
+                queryKey: [QueryKey.Profile],
             });
         },
     });

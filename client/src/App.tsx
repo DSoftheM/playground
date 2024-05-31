@@ -44,7 +44,6 @@ function App() {
             </Route>
             <Route path={nav.auth.register} element={<RegisterForm />} />
             <Route path={nav.auth.login} element={<LoginForm />} />
-            <Route path={nav.auth.login} element={<LoginForm />} />
             <Route path="*" element={<Navigate to={nav.catsCreation} />} />
         </Routes>
     );

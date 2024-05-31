@@ -28,13 +28,11 @@ export function TodoList() {
                     <div key={todo.id} style={todo.done ? { textDecoration: "line-through" } : {}}>
                         {todo.title}
                         {todo.text}
-                        <button
-                            onClick={() => {
-                                updateTodoMutation.mutate({ ...todo, done: true });
-                            }}
-                        >
-                            Done
-                        </button>
+                        {todo.done ? (
+                            <button onClick={() => updateTodoMutation.mutate({ ...todo, done: false })}>undone</button>
+                        ) : (
+                            <button onClick={() => updateTodoMutation.mutate({ ...todo, done: true })}>Done</button>
+                        )}
                     </div>
                 );
             })}
