@@ -14,7 +14,6 @@ export class TodoListService {
   }
 
   createTodo(todo: CreateTodoDto) {
-    console.log(todo);
     return this.todoListRepository.save([todo]);
   }
 

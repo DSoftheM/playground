@@ -52,11 +52,7 @@ export function UseListInfiniteQuery() {
             </Button>
             <List
                 style={{ height: 200, overflow: "auto" }}
-                onScroll={() => {
-                    console.log(infiniteQuery.isFetching, infiniteQuery.hasNextPage);
-                }}
                 onScrollEnd={() => {
-                    console.log("end", infiniteQuery.isFetching, infiniteQuery.hasNextPage);
                     if (!infiniteQuery.isFetching && infiniteQuery.hasNextPage) {
                         infiniteQuery.fetchNextPage();
                     }

@@ -16,8 +16,6 @@ export function Cloud() {
             });
     }, []);
 
-    console.log(1);
-
     return (
         <div>
             <Button

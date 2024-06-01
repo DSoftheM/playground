@@ -23,7 +23,6 @@ export function usePopover(props: UsePopoverProps) {
         if (!ref.current) return;
 
         const coords = ref.current.getBoundingClientRect();
-        console.log("coords :>> ", coords);
         const x = coords.left;
         const y = coords.bottom;
 

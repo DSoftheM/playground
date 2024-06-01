@@ -1,3 +1,4 @@
 export enum zIndex {
-    Notification = 1,
+    Sidebar = 1,
+    Notification = 2,
 }
