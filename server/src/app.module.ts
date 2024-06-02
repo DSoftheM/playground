@@ -17,6 +17,9 @@ import { Stats } from 'fs';
 import { Response } from 'express';
 import { GameCrudModule } from './game-crud/game-crud.module';
 import { TodoListModule } from './features/todo-list/todo-list.module';
+import { DynamicModule } from './documentation/dynamic/dynamic.module';
+import { APP_FILTER } from '@nestjs/core';
+import { FilterException } from './global/filter-exception';
 
 @Module({
   imports: [
@@ -60,6 +63,7 @@ import { TodoListModule } from './features/todo-list/todo-list.module';
     MediaViewerModule,
     GameCrudModule,
     TodoListModule,
+    DynamicModule,
   ],
   controllers: [AppController],
   providers: [
