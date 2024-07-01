@@ -1,5 +1,5 @@
 import { ConfigurableModuleBuilder } from '@nestjs/common';
-import { ZooModuleOptions } from './ZooModuleOptions';
+import { ZooModuleOptions } from './zoo-module-options';
 
 export const { ConfigurableModuleClass, MODULE_OPTIONS_TOKEN } = new ConfigurableModuleBuilder<ZooModuleOptions>()
   .setExtras<{ isGlobal: boolean }>({ isGlobal: false }, (definition, extras) => {

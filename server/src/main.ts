@@ -36,6 +36,8 @@ viteNodeApp.then((app) => {
       forbidNonWhitelisted: true,
     }),
   );
+  const port = 3001;
+  app.listen(port, () => console.log('Server started:', port));
 });
 
 // viteNodeApp.then(x => x.listen(3001, () => console.log('Server started:', port || 3001)))
